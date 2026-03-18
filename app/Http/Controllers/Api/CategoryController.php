@@ -27,33 +27,34 @@ class CategoryController extends Controller
   }
 
 
-  public function store(CreateCategoryRequest $request): JsonResponse
+  public function store(CreateCategoryRequest $request)
   {
-    $category = $this->categoryService->createCategory($request->validated());
 
-    return response()->json([
-      'message' => 'Created successfully',
-      'data' => new CategoryResource($category)
-    ], 201);
+    $validated = $request->validated();
+    $category = $this->categoryService->createCategory(
+      $validated,
+      $request->file('image')
+    );
+    return new CategoryResource($category);
   }
 
 
-  public function show(Category $category): CategoryResource
+  public function show(Category $category)
   {
     return new CategoryResource($category);
   }
 
 
-  public function update(UpdateCategoryRequest $request, Category $category): JsonResponse
+  public function update(Category $category, UpdateCategoryRequest $request)
   {
-    $updatedCategory = $this->categoryService->updateCategory($category, $request->validated());
-
-    return response()->json([
-      'message' => 'Updated successfully',
-      'data' => new CategoryResource($updatedCategory)
-    ]);
+    $validated = $request->validated();
+    $newCategory = $this->categoryService->updateCategory(
+      $category,
+      $validated,
+      $request->file('image')
+    );
+    return new CategoryResource($newCategory);
   }
-
 
   public function destroy(Category $category): JsonResponse
   {

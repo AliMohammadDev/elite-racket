@@ -8,22 +8,34 @@ class CategoryService
 {
   public function findAll()
   {
-    return Category::all();
+    return Category::with(['media'])->get();
   }
 
-  public function findOne($id)
+  public function findOne(Category $category)
   {
-    return Category::find($id);
+    return $category->load(['media']);
   }
 
-  public function createCategory($data)
+  public function createCategory(array $data, $imageFile = null)
   {
-    return Category::create($data);
+    $category = Category::create($data);
+
+    if ($imageFile) {
+      $category->addMedia($imageFile)->toMediaCollection('categories');
+    }
+
+    return $category;
   }
 
   public function updateCategory(Category $category, array $data, $imageFile = null)
   {
     $category->update($data);
+
+    if ($imageFile) {
+      $category->clearMediaCollection('categories');
+      $category->addMedia($imageFile)->toMediaCollection('categories');
+    }
+
     return $category;
   }
   public function deleteCategory(Category $category)
