@@ -23,8 +23,14 @@ class UpdateCategoryRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => 'sometimes|string|max:255|unique:categories,name,' . $this->route('category'),
-      'description' => 'nullable|string',
+      'name' => ['sometimes', 'array'],
+      'name.en' => ['sometimes', 'string', 'max:255'],
+      'name.ar' => ['sometimes', 'string', 'max:255'],
+
+      'description' => ['sometimes', 'array'],
+      'description.en' => ['sometimes', 'string'],
+      'description.ar' => ['sometimes', 'string'],
+
     ];
   }
 }

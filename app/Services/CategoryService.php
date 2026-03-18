@@ -21,17 +21,13 @@ class CategoryService
     return Category::create($data);
   }
 
-  public function updateCategory($id, $data)
+  public function updateCategory(Category $category, array $data, $imageFile = null)
   {
-    $category = Category::find($id);
     $category->update($data);
     return $category;
   }
-
-  public function deleteCategory($id)
+  public function deleteCategory(Category $category)
   {
-    $category = Category::find($id);
-    $category->delete();
-    return $category;
+    return $category->delete();
   }
 }
