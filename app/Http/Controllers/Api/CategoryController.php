@@ -18,7 +18,6 @@ class CategoryController extends Controller
   ) {
   }
 
-
   public function index(): AnonymousResourceCollection
   {
     $categories = $this->categoryService->findAll();
@@ -26,10 +25,8 @@ class CategoryController extends Controller
     return CategoryResource::collection($categories);
   }
 
-
   public function store(CreateCategoryRequest $request)
   {
-
     $validated = $request->validated();
     $category = $this->categoryService->createCategory(
       $validated,
@@ -43,7 +40,6 @@ class CategoryController extends Controller
   {
     return new CategoryResource($category);
   }
-
 
   public function update(Category $category, UpdateCategoryRequest $request)
   {

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Color;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateColorRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -23,10 +23,8 @@ class UpdateColorRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => ['sometimes', 'string', 'max:255'],
-      'user_id' => ['sometimes', 'integer', 'exists:users,id'],
-      'phone' => ['sometimes', 'string', 'max:20'],
-      'address' => ['nullable', 'string', 'max:500'],
+      'email' => ['required', 'email'],
+      'password' => ['required'],
     ];
   }
 }

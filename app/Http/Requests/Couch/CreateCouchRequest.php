@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Color;
+namespace App\Http\Requests\Couch;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateColorRequest extends FormRequest
+class CreateCouchRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -23,9 +23,9 @@ class UpdateColorRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => ['sometimes', 'string', 'max:255'],
-      'user_id' => ['sometimes', 'integer', 'exists:users,id'],
-      'phone' => ['sometimes', 'string', 'max:20'],
+      'name' => ['required', 'string', 'max:255'],
+      'user_id' => ['required', 'integer', 'exists:users,id'],
+      'phone' => ['required', 'string', 'max:20'],
       'address' => ['nullable', 'string', 'max:500'],
     ];
   }

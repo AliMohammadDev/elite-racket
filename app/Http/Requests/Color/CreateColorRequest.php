@@ -23,7 +23,10 @@ class CreateColorRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'color' => ['required', 'string', 'max:255'],
+      'name' => ['required', 'string', 'max:255'],
+      'user_id' => ['required', 'integer', 'exists:users,id'],
+      'phone' => ['required', 'string', 'max:20'],
+      'address' => ['nullable', 'string', 'max:500'],
     ];
   }
 }
