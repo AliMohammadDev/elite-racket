@@ -9,6 +9,4 @@ class Color extends Model
 {
   use HasFactory;
   protected $fillable = ['color', 'hex_code'];
-
-
 }

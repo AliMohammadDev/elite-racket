@@ -16,7 +16,7 @@ class CourtResource extends JsonResource
   {
     return [
       'id' => $this->id,
-      'name' => $this->name,
+      'name' => $this->translated_name,
       'price' => $this->price,
       'discount' => $this->discounts . '%',
       'final_price' => $this->final_price,

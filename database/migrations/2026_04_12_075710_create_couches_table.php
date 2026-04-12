@@ -13,10 +13,10 @@ return new class extends Migration {
   {
     Schema::create('couches', function (Blueprint $table) {
       $table->id();
-      $table->string('name');
+      $table->json('name');
       $table->foreignIdFor(User::class)->constrained();
       $table->string('phone');
-      $table->string('address');
+      $table->json('address');
       $table->timestamps();
     });
   }

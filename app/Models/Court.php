@@ -17,4 +17,17 @@ class Court extends Model
       get: fn() => $this->price - ($this->price * ($this->discounts / 100)),
     );
   }
+
+  protected $casts = [
+    'name' => 'array',
+  ];
+
+  protected function translatedName(): Attribute
+  {
+    return Attribute::make(
+      get: fn() => $this->name[app()->getLocale()] ?? $this->name['en'] ?? '',
+    );
+  }
+
+
 }

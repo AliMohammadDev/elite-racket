@@ -23,7 +23,10 @@ class CreateCourtRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => ['required', 'string', 'max:255'],
+      'name' => ['required', 'array'],
+      'name.en' => ['required', 'string', 'max:255'],
+      'name.ar' => ['required', 'string', 'max:255'],
+
       'price' => ['required', 'integer', 'min:0'],
       'discounts' => ['nullable', 'integer', 'min:0', 'max:100'],
     ];

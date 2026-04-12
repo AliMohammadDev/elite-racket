@@ -16,15 +16,11 @@ class Product extends Model
     return $this->belongsTo(Category::class);
   }
 
-
   // for ar,en
   protected $casts = [
     'name' => 'array',
     'body' => 'array',
   ];
-
-
-
 
   public function getTranslatedNameAttribute(): string
   {

@@ -23,10 +23,16 @@ class UpdateCouchRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => ['sometimes', 'string', 'max:255'],
+      'name' => ['sometimes', 'array'],
+      'name.en' => ['sometimes', 'string', 'max:255'],
+      'name.ar' => ['sometimes', 'string', 'max:255'],
+
       'user_id' => ['sometimes', 'integer', 'exists:users,id'],
       'phone' => ['sometimes', 'string', 'max:20'],
-      'address' => ['nullable', 'string', 'max:500'],
+
+      'address' => ['sometimes', 'array'],
+      'address.en' => ['sometimes', 'string', 'max:255'],
+      'address.ar' => ['sometimes', 'string', 'max:255'],
     ];
   }
 }

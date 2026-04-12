@@ -16,12 +16,14 @@ class DatabaseSeeder extends Seeder
    */
   public function run(): void
   {
-    $roles = ['customer', 'admin', 'super_admin'];
-
-    foreach ($roles as $role) {
-      Role::firstOrCreate(['name' => $role]);
-    }
-
-
+    $this->call([
+      AdminSeeder::class,
+      UserSeeder::class,
+      CategorySeeder::class,
+      ColorSeeder::class,
+      SizeSeeder::class,
+      CourtSeeder::class,
+      CouchSeeder::class,
+    ]);
   }
 }

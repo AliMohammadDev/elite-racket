@@ -16,9 +16,9 @@ class CouchResource extends JsonResource
   {
     return [
       'id' => $this->id,
-      'name' => $this->name,
+      'name' => $this->translated_name,
       'phone' => $this->phone,
-      'address' => $this->address,
+      'address' => $this->translated_address,
       'user' => new UserResource($this->whenLoaded('user')),
       'created_at' => $this->created_at->format('Y-m-d'),
     ];

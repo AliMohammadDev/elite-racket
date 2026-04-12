@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Court;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCourtRequest extends FormRequest
+class ResetPasswordRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -23,12 +23,9 @@ class UpdateCourtRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => ['sometimes', 'array'],
-      'name.en' => ['sometimes', 'string', 'max:255'],
-      'name.ar' => ['sometimes', 'string', 'max:255'],
-
-      'price' => ['sometimes', 'integer', 'min:0'],
-      'discounts' => ['nullable', 'integer', 'min:0', 'max:100'],
+      'email' => ['required', 'email', 'exists:users,email'],
+      'token' => ['required'],
+      'password' => ['required', 'string', 'min:8', 'confirmed'],
     ];
   }
 }

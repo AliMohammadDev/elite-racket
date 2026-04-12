@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Auth\ForgotPasswordController;
+use App\Http\Controllers\Api\Auth\socialAuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ColorController;
+use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductVariantController;
 use App\Http\Controllers\Api\SizeController;
@@ -17,6 +20,18 @@ use App\Http\Controllers\Api\CourtController;
 |--------------------------------------------------------------------------
 */
 Route::middleware(['setLocale'])->group(function () {
+
+
+  // Social Auth
+  Route::get('/login-google', [socialAuthController::class, 'redirectToProvider']);
+  Route::get('/auth/google/callback', [socialAuthController::class, 'handleCallback']);
+
+  // Contact & Password
+  Route::post('contact-us', [ContactController::class, 'send'])->middleware('throttle:5,1');
+  Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
+  Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']);
+
+
 
   // Auth
   Route::post('register', [AuthController::class, 'register']);

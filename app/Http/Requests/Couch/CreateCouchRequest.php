@@ -23,10 +23,17 @@ class CreateCouchRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => ['required', 'string', 'max:255'],
+      'name' => ['required', 'array'],
+      'name.en' => ['required', 'string', 'max:255'],
+      'name.ar' => ['required', 'string', 'max:255'],
+
       'user_id' => ['required', 'integer', 'exists:users,id'],
       'phone' => ['required', 'string', 'max:20'],
-      'address' => ['nullable', 'string', 'max:500'],
+
+      'address' => ['required', 'array'],
+      'address.en' => ['required', 'string', 'max:255'],
+      'address.ar' => ['required', 'string', 'max:255'],
+
     ];
   }
 }

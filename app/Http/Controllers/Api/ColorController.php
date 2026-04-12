@@ -8,7 +8,6 @@ use App\Http\Requests\Color\UpdateColorRequest;
 use App\Http\Resources\ColorResource;
 use App\Models\Color;
 use App\Services\ColorService;
-use Illuminate\Http\Request;
 
 class ColorController extends Controller
 {
