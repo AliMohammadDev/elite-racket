@@ -33,10 +33,9 @@ class TrainingProgram extends Model
     return $this->name[app()->getLocale()] ?? $this->name['en'] ?? '';
   }
 
-  public function getFinalPriceAttribute(): float
+  public function subscriptions()
   {
-    return round($this->price - ($this->price * ($this->discounts / 100)), 2);
+    return $this->hasMany(TrainingSubscription::class);
   }
-
 
 }

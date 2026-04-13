@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CouchController;
 use App\Http\Controllers\Api\CourtController;
+use App\Http\Controllers\Api\TrainingProgramController;
+use App\Http\Controllers\Api\TrainingSubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +66,12 @@ Route::middleware(['setLocale'])->group(function () {
   Route::get('couches', [CouchController::class, 'index']);
   Route::get('couches/{couch}', [CouchController::class, 'show']);
 
+  // Training Programs
+  Route::get('training-programs', [TrainingProgramController::class, 'index']);
+  Route::get('training-programs/{training_program}', [TrainingProgramController::class, 'show']);
+
+  Route::get('subscriptions', [TrainingSubscriptionController::class, 'index']);
+
 });
 
 
@@ -77,6 +85,10 @@ Route::middleware(['setLocale', 'auth:sanctum'])->group(function () {
   // User
   Route::get('me', [AuthController::class, 'me']);
   Route::put('profile', [AuthController::class, 'updateProfile']);
+
+  Route::post('subscriptions', [TrainingSubscriptionController::class, 'store']);
+
+   Route::get('my-subscriptions', [TrainingSubscriptionController::class, 'index']);
 
 });
 
@@ -107,6 +119,12 @@ Route::middleware(['setLocale', 'auth:sanctum'])->group(function () {
 
   Route::apiResource('courts', CourtController::class)->except(['index', 'show']);
   Route::apiResource('couches', CouchController::class)->except(['index', 'show']);
+
+  Route::apiResource('training-programs', TrainingProgramController::class)
+    ->except(['index', 'show']);
+
+  Route::apiResource('all-subscriptions', TrainingSubscriptionController::class)
+    ->except(['store']);
 
 
 });

@@ -51,4 +51,19 @@ class User extends Authenticatable
       'password' => 'hashed',
     ];
   }
+
+  public function trainingSubscriptions()
+  {
+    return $this->hasMany(TrainingSubscription::class);
+  }
+
+  public function subscribedPrograms()
+  {
+    return $this->belongsToMany(
+      TrainingProgram::class,
+      'training_subscriptions',
+      'user_id',
+      'training_program_id'
+    );
+  }
 }

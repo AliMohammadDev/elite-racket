@@ -13,18 +13,18 @@ class TrainingProgramService
       ->get();
   }
 
-  public function create(array $data)
+  public function createTrainingProgram(array $data)
   {
     return TrainingProgram::create($data);
   }
 
-  public function update(TrainingProgram $program, array $data)
+  public function updateTrainingProgram(TrainingProgram $program, array $data)
   {
     $program->update($data);
     return $program;
   }
 
-  public function delete(TrainingProgram $program)
+  public function deleteTrainingProgram(TrainingProgram $program)
   {
     return $program->delete();
   }

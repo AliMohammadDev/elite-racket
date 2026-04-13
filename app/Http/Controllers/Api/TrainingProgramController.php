@@ -23,24 +23,24 @@ class TrainingProgramController extends Controller
 
   public function store(CreateTrainingProgramRequest $request)
   {
-    $program = $this->service->create($request->validated());
+    $program = $this->service->createTrainingProgram($request->validated());
     return new TrainingProgramResource($program);
   }
 
-  public function show(TrainingProgram $trainingProgram)
+  public function show(TrainingProgram $training_program)
   {
-    return new TrainingProgramResource($trainingProgram->load('couch'));
+    return new TrainingProgramResource($training_program->load('couch'));
   }
 
-  public function update(UpdateTrainingProgramRequest $request, TrainingProgram $trainingProgram)
+  public function update(UpdateTrainingProgramRequest $request, TrainingProgram $training_program)
   {
-    $updated = $this->service->update($trainingProgram, $request->validated());
+    $updated = $this->service->updateTrainingProgram($training_program, $request->validated());
     return new TrainingProgramResource($updated);
   }
 
   public function destroy(TrainingProgram $trainingProgram)
   {
-    $this->service->delete($trainingProgram);
-    return response()->json(['message' => 'Deleted successfully']);
+    $this->service->deleteTrainingProgram($trainingProgram);
+    return response()->json(['message' => 'Training Program Deleted successfully']);
   }
 }

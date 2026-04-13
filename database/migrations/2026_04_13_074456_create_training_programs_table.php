@@ -13,12 +13,12 @@ return new class extends Migration {
   {
     Schema::create('training_programs', function (Blueprint $table) {
       $table->id();
-      $table->id();
       $table->json('name');
       $table->decimal('price', 10, 2);
       $table->double('discounts')->default(0);
       $table->foreignIdFor(Couch::class)->constrained();
       $table->enum('train_level', ['beginner', 'intermediate', 'advanced']);
+      $table->timestamps();
     });
   }
 

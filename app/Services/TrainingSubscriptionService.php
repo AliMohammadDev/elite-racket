@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\TrainingProgram;
 use App\Models\TrainingSubscription;
 
 class TrainingSubscriptionService
@@ -17,19 +16,26 @@ class TrainingSubscriptionService
   {
     return TrainingSubscription::with(['user', 'trainingProgram.couch'])->findOrFail($id);
   }
+  public function findByUserId($userId)
+  {
+    return TrainingSubscription::with(['user', 'trainingProgram.couch'])
+      ->where('user_id', $userId)
+      ->latest()
+      ->get();
+  }
 
-  public function create(array $data)
+  public function createTrainingSubscription(array $data)
   {
     return TrainingSubscription::create($data);
   }
 
-  public function update(TrainingSubscription $subscription, array $data)
+  public function updateTrainingSubscription(TrainingSubscription $subscription, array $data)
   {
     $subscription->update($data);
     return $subscription;
   }
 
-  public function delete(TrainingSubscription $subscription)
+  public function deleteTrainingSubscription(TrainingSubscription $subscription)
   {
     return $subscription->delete();
   }

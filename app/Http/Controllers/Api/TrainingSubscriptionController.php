@@ -16,30 +16,34 @@ class TrainingSubscriptionController extends Controller
   }
   public function index()
   {
-    $subscriptions = $this->service->findAll();
+    if (request()->is('*my-subscriptions')) {
+      $subscriptions = $this->service->findByUserId(auth()->id());
+    } else {
+      $subscriptions = $this->service->findAll();
+    }
+
     return TrainingSubscriptionResource::collection($subscriptions);
   }
-
   public function store(CreateSubscriptionRequest $request)
   {
-    $subscription = $this->service->create($request->validated());
+    $subscription = $this->service->createTrainingSubscription($request->validated());
     return new TrainingSubscriptionResource($subscription->load(['user', 'trainingProgram']));
   }
 
-  public function show(TrainingSubscription $subscription)
+  public function show(TrainingSubscription $all_subscription)
   {
-    return new TrainingSubscriptionResource($subscription);
+    return new TrainingSubscriptionResource($all_subscription);
   }
 
-  public function update(UpdateSubscriptionRequest $request, TrainingSubscription $trainingSubscription)
+  public function update(UpdateSubscriptionRequest $request, TrainingSubscription $all_subscription)
   {
-    $updated = $this->service->update($trainingSubscription, $request->validated());
+    $updated = $this->service->updateTrainingSubscription($all_subscription, $request->validated());
     return new TrainingSubscriptionResource($updated->load(['user', 'trainingProgram']));
   }
 
   public function destroy(TrainingSubscription $trainingSubscription)
   {
-    $this->service->delete($trainingSubscription);
+    $this->service->deleteTrainingSubscription($trainingSubscription);
     return response()->json(['message' => 'Subscription deleted successfully']);
   }
 }
