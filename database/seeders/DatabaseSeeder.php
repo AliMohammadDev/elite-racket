@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
       ProductSeeder::class,
       CourtSeeder::class,
       CouchSeeder::class,
+      TrainingProgramSeeder::class
     ]);
   }
 }
