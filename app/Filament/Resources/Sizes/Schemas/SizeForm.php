@@ -15,6 +15,6 @@ class SizeForm
           ->required()
           ->unique(ignoreRecord: true)
           ->maxLength(255),
-      ]);
+      ])  ->columns(1);
   }
 }

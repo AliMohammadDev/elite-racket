@@ -9,6 +9,8 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Support\Enums\TextSize;
+
 
 class ColorsTable
 {
@@ -18,6 +20,7 @@ class ColorsTable
       ->columns([
         TextColumn::make('color')
           ->label('اسم اللون')
+          ->size(TextSize::Large)
           ->searchable()
           ->sortable()
           ->searchable(),
@@ -30,6 +33,8 @@ class ColorsTable
 
         TextColumn::make('created_at')
           ->label('تاريخ الإضافة')
+          ->size(TextSize::Large)
+
           ->dateTime()
           ->sortable()
           ->searchable(),

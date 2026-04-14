@@ -25,7 +25,8 @@ class ColorForm
             ColorPicker::make('hex_code')
               ->label('كود اللون (HEX)')
               ->required(),
-          ])->columns(2),
-      ]);
+          ])->columns(1),
+      ])
+      ->columns(1);
   }
 }

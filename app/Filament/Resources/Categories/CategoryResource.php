@@ -26,7 +26,7 @@ class CategoryResource extends Resource
   protected static ?string $modelLabel = 'صنف';
   protected static string|UnitEnum|null $navigationGroup = 'إدارة المنتجات';
   protected static ?int $navigationSort = 1;
-  protected static ?string $recordTitleAttribute = 'name.ar';
+  protected static ?string $recordTitleAttribute = 'Category';
 
 
 

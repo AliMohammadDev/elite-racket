@@ -5,6 +5,9 @@ namespace App\Filament\Resources\Sizes\Schemas;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Support\Enums\FontWeight;
+use Filament\Support\Enums\TextSize;
+
 
 class SizeInfolist
 {
@@ -19,8 +22,9 @@ class SizeInfolist
               ->label('المقاس')
               ->weight('bold')
               ->color('primary')
+              ->size(TextSize::Large),
           ]),
 
-      ]);
+      ])->columns(1);
   }
 }

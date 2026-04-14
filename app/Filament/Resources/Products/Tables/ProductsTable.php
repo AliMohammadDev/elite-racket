@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Sizes\Tables;
+namespace App\Filament\Resources\Products\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -8,36 +8,40 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Support\Enums\TextSize;
 
 
-class SizesTable
+class ProductsTable
 {
   public static function configure(Table $table): Table
   {
     return $table
       ->columns([
-        TextColumn::make('size')
-          ->label('المقاس')
+        TextColumn::make('name.ar')
+          ->label('الاسم (AR)')
+          ->size(TextSize::Large)
           ->searchable()
-          ->sortable()
-          ->size(TextSize::Large),
-
-        TextColumn::make('created_at')
-          ->label('تاريخ الإضافة')
-          ->size(TextSize::Large)
-
-          ->dateTime()
           ->sortable(),
-        TextColumn::make('updated_at')
-          ->label('تاريخ التحديث')
+
+        TextColumn::make('category.name.ar')
+          ->label('القسم')
+          ->size(TextSize::Large)
+
+          ->badge()
+          ->color('info')
+          ->sortable(),
+        TextColumn::make('created_at')
           ->size(TextSize::Large)
 
           ->dateTime()
           ->sortable()
+
       ])
       ->filters([
-        //
+        SelectFilter::make('category_id')
+          ->label('تصفية حسب القسم')
+          ->relationship('category', 'name->ar'),
       ])
       ->recordActions([
         ViewAction::make(),

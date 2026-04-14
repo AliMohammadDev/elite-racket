@@ -8,6 +8,9 @@ use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Group;
+use Filament\Support\Enums\FontWeight;
+use Filament\Support\Enums\TextSize;
+
 
 class CategoryInfolist
 {
@@ -15,6 +18,49 @@ class CategoryInfolist
   {
     return $schema
       ->components([
+
+
+        Grid::make(2)
+          ->schema([
+            Group::make()
+              ->schema([
+                Section::make('معلومات الصنف الأساسية')
+                  ->icon('heroicon-o-information-circle')
+                  ->schema([
+                    Grid::make(2)
+                      // name
+                      ->schema([
+                        TextEntry::make('name.ar')
+                          ->label('الاسم (العربية)')
+                          ->weight('bold')
+                          ->color('primary')
+                          ->size(TextSize::Large),
+
+                        TextEntry::make('name.en')
+                          ->label('Name (English)')
+                          ->weight('bold')
+                          ->size(TextSize::Large),
+                      ]),
+
+                    Grid::make(1)
+                      // description
+                      ->schema([
+                        TextEntry::make('description.ar')
+                          ->label('الوصف بالعربية')
+                          ->color('primary')
+                          ->placeholder('لا يوجد وصف متاح باللغة العربية.')
+                          ->size(TextSize::Large),
+
+                        TextEntry::make('description.en')
+                          ->label('Description (EN)')
+                          ->placeholder('No English description available.')
+                          ->size(TextSize::Large),
+                      ]),
+                  ]),
+              ])->columnSpan(2),
+          ]),
+
+
         Section::make('صور القسم')
           ->icon('heroicon-o-photo')
           ->schema([
@@ -32,43 +78,7 @@ class CategoryInfolist
               ]),
           ]),
 
-        Grid::make(3)
-          ->schema([
-            Group::make()
-              ->schema([
-                Section::make('معلومات الصنف الأساسية')
-                  ->icon('heroicon-o-information-circle')
-                  ->schema([
-                    Grid::make(2)
-                      ->schema([
-                        TextEntry::make('name.ar')
-                          ->label('الاسم (العربية)')
-                          ->weight('bold')
-                          ->color('primary'),
 
-                        TextEntry::make('name.en')
-                          ->label('Name (English)')
-                          ->weight('bold')
-                          ->color('primary')
-                      ]),
-
-                    Grid::make(1)
-                      ->schema([
-                        TextEntry::make('description.ar')
-                          ->label('الوصف بالعربية')
-                          ->prose()
-                          ->placeholder('لا يوجد وصف متاح باللغة العربية.'),
-
-                        TextEntry::make('description.en')
-                          ->label('Description (EN)')
-                          ->prose()
-                          ->placeholder('No English description available.'),
-                      ]),
-                  ]),
-              ])->columnSpan(2),
-
-
-          ]),
       ]);
   }
 }

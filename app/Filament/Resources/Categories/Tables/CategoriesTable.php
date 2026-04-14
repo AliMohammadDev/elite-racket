@@ -11,7 +11,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\DatePicker;
+use Filament\Support\Enums\FontWeight;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Support\Enums\TextSize;
 
 class CategoriesTable
 {
@@ -24,14 +26,17 @@ class CategoriesTable
           ->label('Image')
           ->circular(),
         TextColumn::make('name.ar')
+          ->size(TextSize::Large)
           ->searchable()
           ->sortable(),
 
         TextColumn::make('name.en')
           ->label('Name (EN)')
+          ->size(TextSize::Large)
           ->searchable()
           ->sortable(),
         TextColumn::make('created_at')
+          ->size(TextSize::Large)
           ->dateTime()
           ->sortable()
       ])
