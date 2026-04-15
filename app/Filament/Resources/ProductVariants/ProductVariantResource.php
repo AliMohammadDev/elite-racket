@@ -26,6 +26,11 @@ class ProductVariantResource extends Resource
   protected static ?string $recordTitleAttribute = 'ProductVariant';
   protected static string|UnitEnum|null $navigationGroup = 'إدارة المنتجات';
 
+  protected static ?string $navigationLabel = 'خيار المنتجات';
+  protected static ?string $pluralModelLabel = 'خيار المنتجات';
+  protected static ?string $modelLabel = 'خيار منتج';
+  protected static ?int $navigationSort = 5;
+
 
   public static function form(Schema $schema): Schema
   {
