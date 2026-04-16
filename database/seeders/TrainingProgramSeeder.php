@@ -22,29 +22,29 @@ class TrainingProgramSeeder extends Seeder
       $programs = [
         [
           'name' => [
-            'ar' => "دورة المبتدئين مع $couchNameAr",
-            'en' => "Beginner Course with $couchNameEn"
+            'ar' => "أساسيات التنس للمبتدئين - $couchNameAr",
+            'en' => "Tennis Basics for Beginners - $couchNameEn"
           ],
-          'price' => 300.0,
-          'discounts' => 0.0,
+          'price' => 300.00,
+          'discounts' => 0.00,
           'train_level' => 'beginner',
         ],
         [
           'name' => [
-            'ar' => "برنامج التدريب المكثف - $couchNameAr",
-            'en' => "Intensive Training - $couchNameEn"
+            'ar' => "تطوير المهارات المتوسطة مع $couchNameAr",
+            'en' => "Intermediate Skills with $couchNameEn"
           ],
-          'price' => 500.0,
-          'discounts' => 10.0,
+          'price' => 550.00,
+          'discounts' => 50.00,
           'train_level' => 'intermediate',
         ],
         [
           'name' => [
-            'ar' => "كورس المحترفين والبطولات ($couchNameAr)",
-            'en' => "Pro & Tournament Course ($couchNameEn)"
+            'ar' => "إعداد البطولات والمحترفين ($couchNameAr)",
+            'en' => "Pro Tournament Prep ($couchNameEn)"
           ],
-          'price' => 850.0,
-          'discounts' => 15.0,
+          'price' => 900.00,
+          'discounts' => 100.00,
           'train_level' => 'advanced',
         ],
       ];
@@ -58,7 +58,7 @@ class TrainingProgramSeeder extends Seeder
           'train_level' => $programData['train_level'],
         ]);
       }
-
     }
+
   }
 }
