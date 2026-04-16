@@ -16,4 +16,6 @@ class ListTrainingSubscriptions extends ListRecords
       CreateAction::make(),
     ];
   }
+
+
 }

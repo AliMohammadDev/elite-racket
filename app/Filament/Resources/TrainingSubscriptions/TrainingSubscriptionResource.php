@@ -13,14 +13,12 @@ use App\Models\TrainingSubscription;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
 class TrainingSubscriptionResource extends Resource
 {
   protected static ?string $model = TrainingSubscription::class;
-
   protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-check';
   protected static ?string $recordTitleAttribute = 'TrainingSubscription';
   protected static string|UnitEnum|null $navigationGroup = 'إدارة الاشتراكات';
