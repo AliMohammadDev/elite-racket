@@ -30,6 +30,9 @@ class CreateProductVariantRequest extends FormRequest
       'discount' => ['nullable', 'numeric', 'min:0'],
       'stock_quantity' => ['required', 'integer', 'min:0'],
 
+      'images' => ['nullable', 'array'],
+      'images.*' => ['image', 'mimes:jpeg,png,jpg,webp', 'max:10240'],// 10MB
+
     ];
   }
 }

@@ -6,15 +6,11 @@ use App\MediaLibrary\ProductPathGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Spatie\Image\Enums\Fit;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\PathGeneratorFactory;
 
-class ProductVariant extends Model implements HasMedia
+class ProductVariant extends Model
 {
-  use HasFactory, InteractsWithMedia;
+  use HasFactory;
   protected $fillable = [
     'product_id',
     'color_id',
@@ -34,13 +30,9 @@ class ProductVariant extends Model implements HasMedia
     );
   }
 
-  public function registerMediaConversions(?Media $media = null): void
+  public function images()
   {
-    $this->addMediaConversion('default')
-      ->fit(Fit::Max, 1000, 1000)
-      ->quality(70)
-      ->format('webp')
-      ->nonQueued();
+    return $this->hasMany(ProductVariantImage::class, 'product_variant_id');
   }
 
 

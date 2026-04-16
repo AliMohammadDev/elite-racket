@@ -29,6 +29,9 @@ class UpdateProductVariantRequest extends FormRequest
       'price' => ['sometimes', 'numeric', 'min:0'],
       'discount' => ['sometimes', 'numeric', 'min:0'],
       'stock_quantity' => ['sometimes', 'integer', 'min:0'],
+
+      'images' => ['nullable', 'array'],
+      'images.*' => ['image', 'mimes:jpeg,png,jpg,webp', 'max:10240'], // 10MB
     ];
   }
 }
