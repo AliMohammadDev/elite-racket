@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Products\Pages;
+namespace App\Filament\Resources\Courts\Pages;
 
-use App\Filament\Resources\Products\ProductResource;
+use App\Filament\Resources\Courts\CourtResource;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Actions;
 
 
-class CreateProduct extends CreateRecord
+class CreateCourt extends CreateRecord
 {
-  protected static string $resource = ProductResource::class;
-
+  protected static string $resource = CourtResource::class;
   protected function getHeaderActions(): array
   {
     return [

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Products\Pages;
+namespace App\Filament\Resources\Couches\Pages;
 
-use App\Filament\Resources\Products\ProductResource;
+use App\Filament\Resources\Couches\CouchResource;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Actions;
 
 
-class CreateProduct extends CreateRecord
+class CreateCouch extends CreateRecord
 {
-  protected static string $resource = ProductResource::class;
+  protected static string $resource = CouchResource::class;
 
   protected function getHeaderActions(): array
   {

@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Filament\Resources\Categories\Pages;
+namespace App\Filament\Resources\Courts\Pages;
 
-use App\Filament\Resources\Categories\CategoryResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Courts\CourtResource;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ViewAction;
+use Filament\Resources\Pages\EditRecord;
 use Filament\Actions;
 
 
-class CreateCategory extends CreateRecord
+class EditCourt extends EditRecord
 {
-  protected static string $resource = CategoryResource::class;
+  protected static string $resource = CourtResource::class;
 
   protected function getHeaderActions(): array
   {
@@ -18,9 +20,10 @@ class CreateCategory extends CreateRecord
         ->label('رجوع')
         ->color('gray')
         ->url($this->getResource()::getUrl('index')),
+      ViewAction::make(),
+      DeleteAction::make(),
     ];
   }
-
   protected function getRedirectUrl(): string
   {
     return $this->getResource()::getUrl('index');
