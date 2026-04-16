@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Categories\Pages;
+namespace App\Filament\Resources\TrainingPrograms\Pages;
 
-use App\Filament\Resources\Categories\CategoryResource;
+use App\Filament\Resources\TrainingPrograms\TrainingProgramResource;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Actions;
 
 
-class CreateCategory extends CreateRecord
+class CreateTrainingProgram extends CreateRecord
 {
-  protected static string $resource = CategoryResource::class;
-
+  protected static string $resource = TrainingProgramResource::class;
   protected function getHeaderActions(): array
   {
     return [

@@ -19,29 +19,32 @@ class UserSeeder extends Seeder
     $customerRole = Role::firstOrCreate(['name' => 'customer']);
 
     $users = [
-      ['name' => 'أحمد محمد', 'email' => 'ahmed@example.com'],
-      ['name' => 'سارة الأحمد', 'email' => 'sara@example.com'],
-      ['name' => 'ياسين نوري', 'email' => 'yassin@example.com'],
-      ['name' => 'ليلى محمود', 'email' => 'layla@example.com'],
-      ['name' => 'عمر خالد', 'email' => 'omar@example.com'],
-      ['name' => 'فاطمة الزهراء', 'email' => 'fatima@example.com'],
-      ['name' => 'محمود ياسر', 'email' => 'mahmoud@example.com'],
-      ['name' => 'نور الهدى', 'email' => 'nour@example.com'],
-      ['name' => 'حمزة العلي', 'email' => 'hamza@example.com'],
-      ['name' => 'ريم القاسم', 'email' => 'reem@example.com'],
+      ['name' => 'أحمد محمد', 'email' => 'ahmed@example.com', 'phone' => '0501234561'],
+      ['name' => 'سارة الأحمد', 'email' => 'sara@example.com', 'phone' => '0501234562'],
+      ['name' => 'ياسين نوري', 'email' => 'yassin@example.com', 'phone' => '0501234563'],
+      ['name' => 'ليلى محمود', 'email' => 'layla@example.com', 'phone' => '0501234564'],
+      ['name' => 'عمر خالد', 'email' => 'omar@example.com', 'phone' => '0501234565'],
+      ['name' => 'فاطمة الزهراء', 'email' => 'fatima@example.com', 'phone' => '0501234566'],
+      ['name' => 'محمود ياسر', 'email' => 'mahmoud@example.com', 'phone' => '0501234567'],
+      ['name' => 'نور الهدى', 'email' => 'nour@example.com', 'phone' => '0501234568'],
+      ['name' => 'حمزة العلي', 'email' => 'hamza@example.com', 'phone' => '0501234569'],
+      ['name' => 'ريم القاسم', 'email' => 'reem@example.com', 'phone' => '0501234570'],
     ];
-
     foreach ($users as $userData) {
       $user = User::firstOrCreate(
         ['email' => $userData['email']],
         [
           'name' => $userData['name'],
+          'phone' => $userData['phone'],
           'password' => Hash::make('password'),
           'is_active' => true,
+          'email_verified_at' => now(),
         ]
       );
 
-      $user->assignRole('customer');
+      if (!$user->hasRole('customer')) {
+        $user->assignRole($customerRole);
+      }
     }
   }
 }

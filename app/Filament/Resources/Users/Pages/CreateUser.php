@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Categories\Pages;
+namespace App\Filament\Resources\Users\Pages;
 
-use App\Filament\Resources\Categories\CategoryResource;
+use App\Filament\Resources\Users\UserResource;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Actions;
 
 
-class CreateCategory extends CreateRecord
+class CreateUser extends CreateRecord
 {
-  protected static string $resource = CategoryResource::class;
+  protected static string $resource = UserResource::class;
 
   protected function getHeaderActions(): array
   {
@@ -20,7 +20,6 @@ class CreateCategory extends CreateRecord
         ->url($this->getResource()::getUrl('index')),
     ];
   }
-
   protected function getRedirectUrl(): string
   {
     return $this->getResource()::getUrl('index');
