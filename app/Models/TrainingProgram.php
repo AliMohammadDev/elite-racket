@@ -2,13 +2,19 @@
 
 namespace App\Models;
 
+use App\MediaLibrary\TrainingProgramPathGenerator;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\Support\PathGenerator\PathGeneratorFactory;
 
-class TrainingProgram extends Model
+class TrainingProgram extends Model implements HasMedia
 {
-  use HasFactory;
+  use HasFactory, InteractsWithMedia;
 
   protected $fillable = [
     'name',
@@ -25,6 +31,23 @@ class TrainingProgram extends Model
     'name' => 'array',
   ];
 
+
+  protected static function booting(): void
+  {
+    PathGeneratorFactory::setCustomPathGenerators(
+      static::class,
+      TrainingProgramPathGenerator::class
+    );
+  }
+
+  public function registerMediaConversions(?Media $media = null): void
+  {
+    $this->addMediaConversion('default')
+      ->fit(Fit::Max, 1000, 1000)
+      ->quality(70)
+      ->format('webp')
+      ->nonQueued();
+  }
 
   public function subscriptions()
   {

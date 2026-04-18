@@ -4,6 +4,7 @@ namespace App\Filament\Resources\TrainingPrograms\Schemas;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -71,9 +72,20 @@ class TrainingProgramForm
                 ->label('تاريخ انتهاء البرنامج')
                 ->native(false)
                 ->displayFormat('d/m/Y')
-                ->after('start_date') 
+                ->after('start_date')
                 ->required(),
             ]),
+
+            Section::make('Media')
+              ->schema([
+                SpatieMediaLibraryFileUpload::make('image')
+                  ->collection('training_programs')
+                  ->disk('public')
+                  ->image()
+                  ->multiple()
+                  ->reorderable()
+                  ->columnSpanFull(),
+              ]),
           ]),
       ])->columns(1);
   }

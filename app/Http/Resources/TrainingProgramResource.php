@@ -23,6 +23,10 @@ class TrainingProgramResource extends JsonResource
       'level' => $this->train_level,
       'couch' => new CouchResource($this->whenLoaded('couch')),
       'created_at' => $this->created_at->format('Y-m-d'),
+      'image' => $this->getFirstMediaUrl('training_programs', 'default'),
+      'all_images' => $this->getMedia('training_programs')->map(function ($media) {
+        return $media->getUrl('default');
+      }),
     ];
   }
 }

@@ -4,20 +4,20 @@ namespace App\MediaLibrary;
 use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class ProductPathGenerator implements PathGenerator
+class TrainingProgramPathGenerator implements PathGenerator
 {
   public function getPath(Media $media): string
   {
-    return 'variants/' . $media->id . '/';
+    return 'training_programs/' . $media->id . '/';
   }
 
   public function getPathForConversions(Media $media): string
   {
-    return 'variants/' . $media->id . '/conversions/';
+    return 'training_programs/' . $media->id . '/conversions/';
   }
 
   public function getPathForResponsiveImages(Media $media): string
   {
-    return 'variants/' . $media->id . '/responsive/';
+    return 'training_programs/' . $media->id . '/responsive/';
   }
 }

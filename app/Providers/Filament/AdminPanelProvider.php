@@ -30,7 +30,6 @@ class AdminPanelProvider extends PanelProvider
       ->default()
       ->id('admin')
       ->path('admin')
-
       ->navigationGroups([
 
         NavigationGroup::make()
@@ -45,15 +44,21 @@ class AdminPanelProvider extends PanelProvider
           ->collapsed(),
 
         NavigationGroup::make()
+          ->label('إدارة البرامج التدريبية'),
+
+        NavigationGroup::make()
           ->label('إدارة الاشتراكات')
         ,
         NavigationGroup::make()
           ->label('إدارة المستخدمين')
         ,
       ])
-
       ->login()
       ->brandName(new HtmlString('<span style="font-style: italic; font-weight: bold; font-family: serif;">Elite Racket</span>'))
+      ->brandLogo(asset('logo.png'))
+      ->darkModeBrandLogo(asset('logo.png'))
+      ->favicon(asset('logo.png'))
+      ->brandLogoHeight('3rem')
       ->colors([
         'primary' => Color::Amber,
       ])
@@ -82,7 +87,6 @@ class AdminPanelProvider extends PanelProvider
         SubscriptionChart::class,
         TrainingLevelsChart::class
       ])
-
       ->middleware([
         EncryptCookies::class,
         AddQueuedCookiesToResponse::class,

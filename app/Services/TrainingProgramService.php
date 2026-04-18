@@ -13,15 +13,23 @@ class TrainingProgramService
       ->get();
   }
 
-  public function createTrainingProgram(array $data)
+  public function createTrainingProgram(array $data, $imageFile = null)
   {
-    return TrainingProgram::create($data);
+    $trainingProgram = TrainingProgram::create($data);
+    if ($imageFile) {
+      $trainingProgram->addMedia($imageFile)->toMediaCollection('training_programs');
+    }
+    return $trainingProgram;
   }
 
-  public function updateTrainingProgram(TrainingProgram $program, array $data)
+  public function updateTrainingProgram(TrainingProgram $training_program, array $data, $imageFile = null)
   {
-    $program->update($data);
-    return $program;
+    $training_program->update($data);
+    if ($imageFile) {
+      $training_program->clearMediaCollection('training_programs');
+      $training_program->addMedia($imageFile)->toMediaCollection('training_programs');
+    }
+    return $training_program;
   }
 
   public function deleteTrainingProgram(TrainingProgram $program)

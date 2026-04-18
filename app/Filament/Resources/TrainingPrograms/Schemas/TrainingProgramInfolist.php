@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TrainingPrograms\Schemas;
 
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -84,6 +85,25 @@ class TrainingProgramInfolist
                     ->color('success'),
                 ]),
               ]),
+
+
+            Section::make('صور القسم')
+              ->icon('heroicon-o-photo')
+              ->schema([
+                SpatieMediaLibraryImageEntry::make('image')
+                  ->collection('training_programs')
+                  ->hiddenLabel()
+                  ->circular()
+                  ->stacked()
+                  ->limit(5)
+                  ->columnSpanFull()
+                  ->extraImgAttributes([
+                    'alt' => 'صورة القسم',
+                    'class' => 'shadow-lg object-cover mx-auto',
+                    'style' => 'width: 100px; height: 100px;',
+                  ]),
+              ]),
+
           ]),
       ])->columns(1);
   }

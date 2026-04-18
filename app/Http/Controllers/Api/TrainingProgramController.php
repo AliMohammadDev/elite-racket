@@ -11,19 +11,25 @@ use App\Services\TrainingProgramService;
 
 class TrainingProgramController extends Controller
 {
-  public function __construct(private TrainingProgramService $service)
-  {
+  public function __construct(
+    private TrainingProgramService $trainingProgramService
+  ) {
   }
 
   public function index()
   {
-    $programs = $this->service->findAll();
+    $programs = $this->trainingProgramService->findAll();
     return TrainingProgramResource::collection($programs);
   }
 
   public function store(CreateTrainingProgramRequest $request)
   {
-    $program = $this->service->createTrainingProgram($request->validated());
+    $validated = $request->validated();
+
+    $program = $this->trainingProgramService->createTrainingProgram(
+      $validated,
+      $request->file('image')
+    );
     return new TrainingProgramResource($program);
   }
 
@@ -34,13 +40,21 @@ class TrainingProgramController extends Controller
 
   public function update(UpdateTrainingProgramRequest $request, TrainingProgram $training_program)
   {
-    $updated = $this->service->updateTrainingProgram($training_program, $request->validated());
-    return new TrainingProgramResource($updated);
+
+    $validated = $request->validated();
+    $newTrainingProgram = $this->trainingProgramService->updateTrainingProgram(
+      $training_program,
+      $validated,
+      $request->file('image')
+    );
+
+
+    return new TrainingProgramResource($newTrainingProgram);
   }
 
   public function destroy(TrainingProgram $trainingProgram)
   {
-    $this->service->deleteTrainingProgram($trainingProgram);
+    $this->trainingProgramService->deleteTrainingProgram($trainingProgram);
     return response()->json(['message' => 'Training Program Deleted successfully']);
   }
 }

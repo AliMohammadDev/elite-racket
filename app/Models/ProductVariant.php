@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use App\MediaLibrary\ProductPathGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Spatie\MediaLibrary\Support\PathGenerator\PathGeneratorFactory;
 
 class ProductVariant extends Model
 {
@@ -22,19 +20,10 @@ class ProductVariant extends Model
     'barcode'
   ];
 
-  protected static function booting(): void
-  {
-    PathGeneratorFactory::setCustomPathGenerators(
-      static::class,
-      ProductPathGenerator::class
-    );
-  }
-
   public function images()
   {
     return $this->hasMany(ProductVariantImage::class, 'product_variant_id');
   }
-
 
   protected static function boot()
   {
@@ -93,6 +82,5 @@ class ProductVariant extends Model
   {
     return $this->belongsTo(Size::class);
   }
-
 
 }

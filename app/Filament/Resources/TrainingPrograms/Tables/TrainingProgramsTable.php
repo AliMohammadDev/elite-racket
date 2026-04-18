@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Support\Enums\TextSize;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -18,6 +19,13 @@ class TrainingProgramsTable
   {
     return $table
       ->columns([
+
+        SpatieMediaLibraryImageColumn::make('image')
+          ->collection('training_programs')
+          ->label('Image')
+          ->circular(),
+
+
         TextColumn::make('name.' . app()->getLocale())
           ->label('البرنامج')
           ->size(TextSize::Large)
