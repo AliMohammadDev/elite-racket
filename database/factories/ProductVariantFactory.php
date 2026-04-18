@@ -90,4 +90,5 @@ class ProductVariantFactory extends Factory
       }
     });
   }
+
 }

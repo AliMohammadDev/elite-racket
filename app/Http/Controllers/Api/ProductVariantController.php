@@ -28,7 +28,6 @@ class ProductVariantController extends Controller
   {
     $variant = $this->productVariantService->createProductVariant(
       $request->validated(),
-      $request->file('image')
     );
     return new ProductVariantResource($variant);
   }
@@ -36,9 +35,8 @@ class ProductVariantController extends Controller
   public function update(UpdateProductVariantRequest $request, ProductVariant $product_variant)
   {
     $variant = $this->productVariantService->updateProductVariant(
-      $product_variant,
       $request->validated(),
-      $request->file('image')
+      $product_variant,
     );
     return new ProductVariantResource($variant);
   }

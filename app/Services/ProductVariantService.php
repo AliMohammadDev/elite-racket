@@ -6,8 +6,8 @@ use App\Models\ProductVariantImage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\Encoders\WebpEncoder;
 
 class ProductVariantService
 {
@@ -26,44 +26,35 @@ class ProductVariantService
   public function createProductVariant(array $data)
   {
     return DB::transaction(function () use ($data) {
-      $manager = new ImageManager(new Driver());
 
       $variant = ProductVariant::create([
         'product_id' => $data['product_id'],
         'color_id' => $data['color_id'],
         'size_id' => $data['size_id'],
-        'material_id' => $data['material_id'],
+        'material_id' => $data['material_id'] ?? null,
         'price' => $data['price'],
         'discount' => $data['discount'] ?? 0,
         'stock_quantity' => $data['stock_quantity'],
         'image' => '',
       ]);
 
-      if (isset($data['packages']) && is_array($data['packages'])) {
-        foreach ($data['packages'] as $packageData) {
-          $variant->packages()->create([
-            'quantity' => $packageData['quantity'],
-            'price' => $packageData['price'],
-          ]);
-        }
-      }
+      $disk = Storage::disk('public');
 
-      if (isset($data['images']) && is_array($data['images'])) {
+      if (!empty($data['images']) && is_array($data['images'])) {
+
         $variantDirectory = "product_variants/{$variant->id}";
-
-        if (!Storage::disk('public')->exists($variantDirectory)) {
-          Storage::disk('public')->makeDirectory($variantDirectory);
-        }
+        $disk->makeDirectory($variantDirectory);
 
         foreach ($data['images'] as $index => $imageFile) {
+
           $filename = Str::uuid() . '.webp';
           $finalPath = "{$variantDirectory}/{$filename}";
 
-          $img = $manager->read($imageFile)
-            ->scale(width: 1000, height: 1000)
-            ->toWebp(70);
+          $img = Image::decode($imageFile)
+            ->scaleDown(1000, 1000)
+            ->encode(new WebpEncoder(quality: 70));
 
-          Storage::disk('public')->put($finalPath, (string) $img);
+          $disk->put($finalPath, (string) $img);
 
           ProductVariantImage::create([
             'product_variant_id' => $variant->id,
@@ -83,33 +74,33 @@ class ProductVariantService
   public function updateProductVariant(array $data, ProductVariant $product_variant)
   {
     return DB::transaction(function () use ($data, $product_variant) {
+
       $product_variant->update($data);
 
-      if (isset($data['images']) && is_array($data['images'])) {
-        $manager = new ImageManager(new Driver());
+      $disk = Storage::disk('public');
+      $variantDirectory = "product_variants/{$product_variant->id}";
 
-        $variantDirectory = "product_variants/{$product_variant->id}";
+      if (!empty($data['images']) && is_array($data['images'])) {
 
-        if (!Storage::disk('public')->exists($variantDirectory)) {
-          Storage::disk('public')->makeDirectory($variantDirectory);
-        }
+        $disk->makeDirectory($variantDirectory);
 
         foreach ($data['images'] as $index => $imageFile) {
-          $filename = (string) Str::uuid() . '.webp';
+
+          $filename = Str::uuid() . '.webp';
           $finalPath = "{$variantDirectory}/{$filename}";
 
-          $img = $manager->read($imageFile)
-            ->scale(width: 1000, height: 1000)
-            ->toWebp(70);
+          $img = Image::decode($imageFile)
+            ->scaleDown(1000, 1000)
+            ->encode(new WebpEncoder(quality: 70));
 
-          Storage::disk('public')->put($finalPath, (string) $img);
+          $disk->put($finalPath, (string) $img);
 
           ProductVariantImage::create([
             'product_variant_id' => $product_variant->id,
             'image' => $filename,
           ]);
 
-          if (empty($product_variant->image)) {
+          if ($index === 0 && empty($product_variant->image)) {
             $product_variant->update(['image' => $filename]);
           }
         }
