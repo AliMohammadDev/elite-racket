@@ -35,11 +35,20 @@ class TrainingSubscriptionsTable
           ->size(TextSize::Large)
           ->placeholder('غير محدد'),
 
+        TextColumn::make('trainingProgram.final_price')
+          ->label('قيمة الاشتراك')
+          ->money('USD', locale: 'en')
+          ->color('success')
+          ->weight('bold')
+          ->alignCenter(),
+
         TextColumn::make('created_at')
           ->label('تاريخ الاشتراك')
+          ->description(fn($record) => $record->created_at->diffForHumans())
+          ->dateTime('d/m/Y - h:i A')
           ->size(TextSize::Large)
-          ->dateTime()
           ->sortable(),
+
       ])
       ->filters([
         SelectFilter::make('training_program_id')

@@ -35,4 +35,9 @@ class Couch extends Model
       get: fn() => $this->address[app()->getLocale()] ?? $this->address['en'] ?? '',
     );
   }
+
+  public function trainingPrograms()
+  {
+    return $this->hasMany(TrainingProgram::class);
+  }
 }

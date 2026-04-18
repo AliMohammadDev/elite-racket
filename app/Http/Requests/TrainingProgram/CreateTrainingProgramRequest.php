@@ -26,11 +26,15 @@ class CreateTrainingProgramRequest extends FormRequest
       'name' => ['required', 'array'],
       'name.ar' => ['required', 'string', 'max:255'],
       'name.en' => ['required', 'string', 'max:255'],
-      
+
       'price' => ['required', 'numeric', 'min:0'],
       'discounts' => ['nullable', 'numeric', 'min:0', 'max:100'],
       'couch_id' => ['required', 'exists:couches,id'],
       'train_level' => ['required', 'in:beginner,intermediate,advanced'],
+
+      'users_count' => ['required', 'integer', 'min:1'],
+      'start_date' => ['required', 'date', 'after_or_equal:today'],
+      'end_date' => ['required', 'date', 'after:start_date'],
     ];
   }
 }

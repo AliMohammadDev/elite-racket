@@ -31,6 +31,10 @@ class UpdateTrainingProgramRequest extends FormRequest
       'discounts' => ['nullable', 'numeric', 'min:0', 'max:100'],
       'couch_id' => ['sometimes', 'exists:couches,id'],
       'train_level' => ['sometimes', 'in:beginner,intermediate,advanced'],
+
+      'users_count' => ['sometimes', 'integer', 'min:1'],
+      'start_date' => ['sometimes', 'date'],
+      'end_date' => ['sometimes', 'date', 'after:start_date'],
     ];
   }
 }

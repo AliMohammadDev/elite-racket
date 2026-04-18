@@ -29,7 +29,7 @@ class CouchForm
             Grid::make(2)->schema([
               Select::make('user_id')
                 ->label('المستخدم المرتبط')
-                ->relationship('user', 'name') // يفترض وجود علاقة user
+                ->relationship('user', 'name') 
                 ->searchable()
                 ->preload()
                 ->required(),

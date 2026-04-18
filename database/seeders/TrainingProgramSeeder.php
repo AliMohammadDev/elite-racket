@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Couch;
 use App\Models\TrainingProgram;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 class TrainingProgramSeeder extends Seeder
 {
@@ -14,6 +15,11 @@ class TrainingProgramSeeder extends Seeder
   public function run(): void
   {
     $couches = Couch::all();
+
+    if ($couches->isEmpty()) {
+      $this->command->warn('يرجى تشغيل CouchSeeder أولاً!');
+      return;
+    }
 
     foreach ($couches as $couch) {
       $couchNameAr = $couch->name['ar'] ?? 'المدرب';
@@ -28,6 +34,7 @@ class TrainingProgramSeeder extends Seeder
           'price' => 300.00,
           'discounts' => 0.00,
           'train_level' => 'beginner',
+          'users_count' => rand(10, 15),
         ],
         [
           'name' => [
@@ -37,6 +44,7 @@ class TrainingProgramSeeder extends Seeder
           'price' => 550.00,
           'discounts' => 50.00,
           'train_level' => 'intermediate',
+          'users_count' => rand(15, 25),
         ],
         [
           'name' => [
@@ -46,16 +54,23 @@ class TrainingProgramSeeder extends Seeder
           'price' => 900.00,
           'discounts' => 100.00,
           'train_level' => 'advanced',
+          'users_count' => 8,
         ],
       ];
 
-      foreach ($programs as $programData) {
+      foreach ($programs as $index => $programData) {
+        $startDate = Carbon::now()->addDays(rand(1, 10));
+        $endDate = (clone $startDate)->addMonths(rand(1, 3));
+
         TrainingProgram::create([
           'name' => $programData['name'],
           'price' => $programData['price'],
           'discounts' => $programData['discounts'],
           'couch_id' => $couch->id,
           'train_level' => $programData['train_level'],
+          'users_count' => $programData['users_count'],
+          'start_date' => $startDate,
+          'end_date' => $endDate,
         ]);
       }
     }

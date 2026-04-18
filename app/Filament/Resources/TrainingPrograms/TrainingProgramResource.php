@@ -6,6 +6,7 @@ use App\Filament\Resources\TrainingPrograms\Pages\CreateTrainingProgram;
 use App\Filament\Resources\TrainingPrograms\Pages\EditTrainingProgram;
 use App\Filament\Resources\TrainingPrograms\Pages\ListTrainingPrograms;
 use App\Filament\Resources\TrainingPrograms\Pages\ViewTrainingProgram;
+use App\Filament\Resources\TrainingPrograms\RelationManagers\SubscriptionsRelationManager;
 use App\Filament\Resources\TrainingPrograms\Schemas\TrainingProgramForm;
 use App\Filament\Resources\TrainingPrograms\Schemas\TrainingProgramInfolist;
 use App\Filament\Resources\TrainingPrograms\Tables\TrainingProgramsTable;
@@ -21,7 +22,7 @@ class TrainingProgramResource extends Resource
   protected static ?string $model = TrainingProgram::class;
   protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
   protected static ?string $recordTitleAttribute = 'TrainingProgram';
-  protected static string|UnitEnum|null $navigationGroup = 'إدارة الكباتن';
+  protected static string|UnitEnum|null $navigationGroup = 'إدارة البرامج التدريبية';
   protected static ?string $navigationLabel = 'البرامج التدريبية';
   protected static ?string $modelLabel = 'برنامج تدريبي';
   protected static ?string $pluralModelLabel = 'البرامج التدريبية';
@@ -44,9 +45,11 @@ class TrainingProgramResource extends Resource
   public static function getRelations(): array
   {
     return [
-      //
+      SubscriptionsRelationManager::class,
+
     ];
   }
+
 
   public static function getPages(): array
   {

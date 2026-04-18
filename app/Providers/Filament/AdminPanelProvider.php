@@ -8,6 +8,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -29,9 +30,30 @@ class AdminPanelProvider extends PanelProvider
       ->default()
       ->id('admin')
       ->path('admin')
+
+      ->navigationGroups([
+
+        NavigationGroup::make()
+          ->label('إدارة المنتجات'),
+
+        NavigationGroup::make()
+          ->label('إدارة المدربين الرياضيين')
+          ->collapsed(),
+
+        NavigationGroup::make()
+          ->label('إدارة الملاعب')
+          ->collapsed(),
+
+        NavigationGroup::make()
+          ->label('إدارة الاشتراكات')
+        ,
+        NavigationGroup::make()
+          ->label('إدارة المستخدمين')
+        ,
+      ])
+
       ->login()
       ->brandName(new HtmlString('<span style="font-style: italic; font-weight: bold; font-family: serif;">Elite Racket</span>'))
-
       ->colors([
         'primary' => Color::Amber,
       ])

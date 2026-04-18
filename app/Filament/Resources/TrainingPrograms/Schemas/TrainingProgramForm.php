@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TrainingPrograms\Schemas;
 
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
@@ -39,9 +40,39 @@ class TrainingProgramForm
                 ])->required(),
             ]),
 
-            Grid::make(2)->schema([
+            Grid::make(3)->schema([
               TextInput::make('price')->label('السعر')->numeric()->prefix('$')->required(),
               TextInput::make('discounts')->label('الخصم (%)')->numeric()->default(0),
+
+              TextInput::make('users_count')
+                ->label('الحد الأقصى للمشتركين')
+                ->numeric()
+                ->minValue(1)
+                ->placeholder('مثلاً: 15')
+                ->required(),
+
+              TextInput::make('users_count')
+                ->label('الحد الأقصى للمشتركين')
+                ->numeric()
+                ->minValue(1)
+                ->placeholder('مثلاً: 15')
+                ->required(),
+
+            ]),
+
+            Grid::make(2)->schema([
+              DatePicker::make('start_date')
+                ->label('تاريخ بدء البرنامج')
+                ->native(false)
+                ->displayFormat('d/m/Y')
+                ->required(),
+
+              DatePicker::make('end_date')
+                ->label('تاريخ انتهاء البرنامج')
+                ->native(false)
+                ->displayFormat('d/m/Y')
+                ->after('start_date') 
+                ->required(),
             ]),
           ]),
       ])->columns(1);

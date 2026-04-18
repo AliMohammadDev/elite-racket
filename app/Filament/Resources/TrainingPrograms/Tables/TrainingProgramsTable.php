@@ -10,6 +10,7 @@ use Filament\Support\Enums\TextSize;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Carbon;
 
 class TrainingProgramsTable
 {
@@ -43,6 +44,23 @@ class TrainingProgramsTable
             'advanced' => 'danger',
             default => 'gray',
           }),
+
+
+        TextColumn::make('dates')
+          ->label('الفترة الزمنية')
+          ->description(fn($record) => 'تنتهي في: ' . Carbon::parse($record->end_date)->format('d/m/Y'))
+          ->getStateUsing(fn($record) => Carbon::parse($record->start_date)->format('d/m/Y'))
+          ->icon('heroicon-m-calendar-days')
+          ->color('gray'),
+
+        TextColumn::make('users_count')
+          ->label('السعة المتاحة')
+          ->numeric()
+          ->alignCenter()
+          ->description('مشترك كحد أقصى')
+          ->color('info')
+          ->icon('heroicon-m-users'),
+
 
         TextColumn::make('price')
           ->size(TextSize::Large)

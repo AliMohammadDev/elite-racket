@@ -6,6 +6,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 
 class TrainingSubscriptionForm
 {
@@ -18,15 +20,32 @@ class TrainingSubscriptionForm
           ->schema([
             Select::make('user_id')
               ->label('المتدرب (المستخدم)')
-              ->relationship('user', 'name')
+              ->relationship(
+                name: 'user',
+                titleAttribute: 'name',
+              )
               ->searchable()
               ->preload()
               ->required(),
 
             Select::make('training_program_id')
               ->label('البرنامج التدريبي')
-              ->relationship('trainingProgram', 'name')
-              ->getOptionLabelFromRecordUsing(fn($record) => $record->name[app()->getLocale()] ?? $record->name['en'])
+              ->relationship(
+                name: 'trainingProgram',
+                modifyQueryUsing: function (Builder $query) {
+                  return $query->where('end_date', '>=', now())
+                    ->withCount('subscriptions')
+                    ->havingRaw('subscriptions_count < users_count');
+                }
+              )
+              ->getOptionLabelFromRecordUsing(function ($record) {
+                $locale = app()->getLocale();
+                $name = $record->name[$locale] ?? $record->name['en'];
+
+                $remaining = $record->remaining_slots;
+
+                return "{$name} — (المقاعد المتبقية: {$remaining})";
+              })
               ->searchable()
               ->preload()
               ->required(),

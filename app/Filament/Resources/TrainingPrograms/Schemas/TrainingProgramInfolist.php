@@ -15,36 +15,76 @@ class TrainingProgramInfolist
     return $schema
       ->components([
         Section::make('تفاصيل البرنامج التدريبي')
+          ->icon('heroicon-o-information-circle')
           ->schema([
-            Grid::make(2)->schema([
+            Grid::make(3)->schema([
               TextEntry::make('translated_name')
                 ->label('اسم البرنامج')
-                ->weight('bold'),
+                ->size(TextSize::Large)
+                ->weight('bold')
+                ->color('primary'),
+
               TextEntry::make('train_level')
-                ->label('المستوى')
-                ->size(TextSize::Large)
-                ->badge(),
-              TextEntry::make('couch.translated_name')
-                ->size(TextSize::Large)
-                ->label('الكوتش'),
+                ->label('مستوى التدريب')
+                ->badge()
+                ->color(fn(string $state): string => match ($state) {
+                  'beginner' => 'success',
+                  'intermediate' => 'warning',
+                  'advanced' => 'danger',
+                  default => 'gray',
+                }),
+
+              TextEntry::make('couch.name.' . app()->getLocale())
+                ->label('الكوتش المسؤول')
+                ->icon('heroicon-m-user-circle'),
             ]),
 
-            Grid::make(2)->schema([
-              TextEntry::make('price')
-                ->label('السعر الأصلي')
-                ->size(TextSize::Large)
-                ->money('USD', locale: 'en'),
-              TextEntry::make('discounts')
-                ->label('الخصم')
-                ->size(TextSize::Large)
-                ->suffix('%'),
-              TextEntry::make('final_price')
-                ->label('السعر النهائي')
-                ->size(TextSize::Large)
-                ->money('USD', locale: 'en')
-                ->color('success')->badge(),
-            ]),
+            Section::make('الجدول الزمني والسعة')
+              ->compact()
+              ->schema([
+                Grid::make(3)->schema([
+                  TextEntry::make('start_date')
+                    ->label('تاريخ البدء')
+                    ->date('d/m/Y')
+                    ->icon('heroicon-m-calendar'),
+
+                  TextEntry::make('end_date')
+                    ->label('تاريخ الانتهاء')
+                    ->date('d/m/Y')
+                    ->icon('heroicon-m-flag'),
+
+                  TextEntry::make('users_count')
+                    ->label('السعة القصوى')
+                    ->suffix(' مشترك')
+                    ->weight('bold')
+                    ->color('info')
+                    ->icon('heroicon-m-users'),
+                ]),
+              ]),
+
+            Section::make('المعلومات المالية')
+              ->compact()
+              ->schema([
+                Grid::make(3)->schema([
+                  TextEntry::make('price')
+                    ->label('السعر الأصلي')
+                    ->money('USD', locale: 'en'),
+
+                  TextEntry::make('discounts')
+                    ->label('قيمة الخصم')
+                    ->money('USD', locale: 'en')
+                    ->color('danger'),
+
+                  TextEntry::make('final_price')
+                    ->label('السعر النهائي')
+                    ->money('USD', locale: 'en')
+                    ->weight('black')
+                    ->size(TextSize::Large)
+                    ->badge()
+                    ->color('success'),
+                ]),
+              ]),
           ]),
-      ]);
+      ])->columns(1);
   }
 }

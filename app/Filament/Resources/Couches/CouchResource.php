@@ -6,6 +6,7 @@ use App\Filament\Resources\Couches\Pages\CreateCouch;
 use App\Filament\Resources\Couches\Pages\EditCouch;
 use App\Filament\Resources\Couches\Pages\ListCouches;
 use App\Filament\Resources\Couches\Pages\ViewCouch;
+use App\Filament\Resources\Couches\RelationManagers\TrainingProgramsRelationManager;
 use App\Filament\Resources\Couches\Schemas\CouchForm;
 use App\Filament\Resources\Couches\Schemas\CouchInfolist;
 use App\Filament\Resources\Couches\Tables\CouchesTable;
@@ -21,11 +22,11 @@ class CouchResource extends Resource
   protected static ?string $model = Couch::class;
   protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-identification';
   protected static ?string $recordTitleAttribute = 'Couch';
-  protected static string|UnitEnum|null $navigationGroup = 'إدارة الكباتن';
-  protected static ?string $navigationLabel = 'قائمة الكباتن';
+  protected static string|UnitEnum|null $navigationGroup = 'إدارة المدربين الرياضيين';
+  protected static ?string $navigationLabel = 'قائمة المدربين الرياضيين';
   protected static ?int $navigationSort = 1;
-  protected static ?string $pluralModelLabel = 'الكباتن';
-  protected static ?string $modelLabel = 'كابتن';
+  protected static ?string $pluralModelLabel = 'المدربين الرياضيين';
+  protected static ?string $modelLabel = 'مدرب رياضي';
 
   public static function form(Schema $schema): Schema
   {
@@ -45,7 +46,7 @@ class CouchResource extends Resource
   public static function getRelations(): array
   {
     return [
-      //
+      TrainingProgramsRelationManager::class,
     ];
   }
 

@@ -17,6 +17,9 @@ return new class extends Migration {
       $table->decimal('price', 10, 2);
       $table->double('discounts')->default(0);
       $table->foreignIdFor(Couch::class)->constrained();
+      $table->date('start_date')->nullable();
+      $table->date('end_date')->nullable();
+      $table->integer('users_count')->default(0);
       $table->enum('train_level', ['beginner', 'intermediate', 'advanced']);
       $table->timestamps();
     });
