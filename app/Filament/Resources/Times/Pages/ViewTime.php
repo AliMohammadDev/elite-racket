@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Filament\Resources\Categories\Pages;
+namespace App\Filament\Resources\Times\Pages;
 
-use App\Filament\Resources\Categories\CategoryResource;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\Times\TimeResource;
+use Filament\Actions\EditAction;
+use Filament\Resources\Pages\ViewRecord;
 use Filament\Actions;
 
 
-class CreateCategory extends CreateRecord
+class ViewTime extends ViewRecord
 {
-  protected static string $resource = CategoryResource::class;
+  protected static string $resource = TimeResource::class;
 
   protected function getHeaderActions(): array
   {
@@ -18,6 +19,7 @@ class CreateCategory extends CreateRecord
         ->label('رجوع')
         ->color('gray')
         ->url($this->getResource()::getUrl('index')),
+      EditAction::make(),
     ];
   }
 

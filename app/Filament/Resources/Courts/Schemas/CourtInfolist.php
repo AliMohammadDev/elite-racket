@@ -42,6 +42,6 @@ class CourtInfolist
                 ->color('success'),
             ]),
           ]),
-      ]);
+      ])->columns(1);
   }
 }

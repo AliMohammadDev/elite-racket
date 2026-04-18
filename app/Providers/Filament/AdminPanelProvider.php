@@ -31,29 +31,17 @@ class AdminPanelProvider extends PanelProvider
       ->id('admin')
       ->path('admin')
       ->navigationGroups([
-
         NavigationGroup::make()
           ->label('إدارة المنتجات'),
-
-        NavigationGroup::make()
-          ->label('إدارة المدربين الرياضيين')
-          ->collapsed(),
-
-        NavigationGroup::make()
-          ->label('إدارة الملاعب')
-          ->collapsed(),
-
-        NavigationGroup::make()
-          ->label('إدارة البرامج التدريبية'),
-
-        NavigationGroup::make()
-          ->label('إدارة الاشتراكات')
-        ,
-        NavigationGroup::make()
-          ->label('إدارة المستخدمين')
-        ,
+        NavigationGroup::make()->label('إدارة المدربين الرياضيين')->collapsed(),
+        NavigationGroup::make()->label('إدارة الملاعب')->collapsed(),
+        NavigationGroup::make()->label('إدارة المواعيد')->collapsed(),
+        NavigationGroup::make()->label('إدارة البرامج التدريبية'),
+        NavigationGroup::make()->label('إدارة الاشتراكات'),
+        NavigationGroup::make()->label('إدارة المستخدمين'),
       ])
       ->login()
+
       ->brandName(new HtmlString('<span style="font-style: italic; font-weight: bold; font-family: serif;">Elite Racket</span>'))
       ->brandLogo(asset('logo.png'))
       ->darkModeBrandLogo(asset('logo.png'))
@@ -76,6 +64,7 @@ class AdminPanelProvider extends PanelProvider
         </style>
     '),
       )
+      ->globalSearch(false)
       ->spa()
       ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
       ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

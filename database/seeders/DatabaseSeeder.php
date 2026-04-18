@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
       CourtSeeder::class,
       CouchSeeder::class,
       TrainingProgramSeeder::class,
-      TrainingSubscriptionSeeder::class
+      TrainingSubscriptionSeeder::class,
+      TimeSeeder::class
     ]);
 
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Categories\Pages;
+namespace App\Filament\Resources\Times\Pages;
 
-use App\Filament\Resources\Categories\CategoryResource;
+use App\Filament\Resources\Times\TimeResource;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Actions;
 
 
-class CreateCategory extends CreateRecord
+class CreateTime extends CreateRecord
 {
-  protected static string $resource = CategoryResource::class;
+  protected static string $resource = TimeResource::class;
 
   protected function getHeaderActions(): array
   {
