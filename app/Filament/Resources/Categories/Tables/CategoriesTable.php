@@ -11,7 +11,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\DatePicker;
-use Filament\Support\Enums\FontWeight;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Support\Enums\TextSize;
 
@@ -25,6 +24,7 @@ class CategoriesTable
           ->collection('categories')
           ->label('Image')
           ->circular(),
+
         TextColumn::make('name.ar')
           ->size(TextSize::Large)
           ->searchable()
