@@ -63,6 +63,7 @@ class CourtBookingsTable
             'pending' => 'قيد الانتظار',
             'approved' => 'مقبول',
             'rejected' => 'مرفوض',
+            'completed' => 'مكتمل',
           ])
           ->selectablePlaceholder(false)
           ->extraAttributes(fn($state) => [
@@ -70,6 +71,7 @@ class CourtBookingsTable
               'approved' => 'color: green; font-weight: bold;',
               'pending' => 'color: orange; font-weight: bold;',
               'rejected' => 'color: red; font-weight: bold;',
+              'completed' => 'color: blue; font-weight: bold;',
               default => '',
             }
           ])
@@ -82,6 +84,7 @@ class CourtBookingsTable
             'pending' => 'قيد الانتظار',
             'approved' => 'مقبول',
             'rejected' => 'مرفوض',
+            'completed' => 'مكتمل',
           ]),
 
         SelectFilter::make('court_id')

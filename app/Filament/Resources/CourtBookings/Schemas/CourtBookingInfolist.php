@@ -78,6 +78,7 @@ class CourtBookingInfolist
                   'approved' => 'success',
                   'pending' => 'warning',
                   'rejected' => 'danger',
+                  'completed' => 'info',
                   default => 'gray',
                 }),
             ]),

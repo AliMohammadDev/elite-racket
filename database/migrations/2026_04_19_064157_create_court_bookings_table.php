@@ -22,7 +22,7 @@ return new class extends Migration {
       $table->foreignIdFor(User::class)->constrained();
       $table->decimal('total_price', 10, 2)
         ->default(0);
-      $table->enum('status', ['pending', 'approved', 'rejected'])
+      $table->enum('status', ['pending', 'approved', 'rejected','completed'])
         ->default('pending');
       $table->dateTime('booking_date');
       $table->timestamps();
