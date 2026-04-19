@@ -27,19 +27,25 @@ class TrainingSubscriptionsTable
           ->label('البرنامج التدريبي')
           ->badge()
           ->size(TextSize::Large)
+          ->sortable()
           ->color('info')
           ->searchable(),
 
         TextColumn::make('trainingProgram.couch.name.' . app()->getLocale())
           ->label('الكوتش المسؤول')
           ->size(TextSize::Large)
+          ->sortable()
+          ->searchable()
           ->placeholder('غير محدد'),
 
         TextColumn::make('trainingProgram.final_price')
           ->label('قيمة الاشتراك')
           ->money('USD', locale: 'en')
           ->color('success')
+          ->size(TextSize::Large)
           ->weight('bold')
+          ->sortable()
+          ->searchable()
           ->alignCenter(),
 
         TextColumn::make('created_at')
@@ -47,6 +53,7 @@ class TrainingSubscriptionsTable
           ->description(fn($record) => $record->created_at->diffForHumans())
           ->dateTime('d/m/Y - h:i A')
           ->size(TextSize::Large)
+          ->searchable()
           ->sortable(),
 
       ])

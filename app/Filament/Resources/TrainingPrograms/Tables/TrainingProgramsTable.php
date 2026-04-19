@@ -59,12 +59,16 @@ class TrainingProgramsTable
           ->description(fn($record) => 'تنتهي في: ' . Carbon::parse($record->end_date)->format('d/m/Y'))
           ->getStateUsing(fn($record) => Carbon::parse($record->start_date)->format('d/m/Y'))
           ->icon('heroicon-m-calendar-days')
+          ->size(TextSize::Large)
+
           ->color('gray'),
 
         TextColumn::make('users_count')
           ->label('السعة المتاحة')
           ->numeric()
           ->alignCenter()
+          ->size(TextSize::Large)
+
           ->description('مشترك كحد أقصى')
           ->color('info')
           ->icon('heroicon-m-users'),
@@ -73,6 +77,8 @@ class TrainingProgramsTable
         TextColumn::make('price')
           ->size(TextSize::Large)
           ->sortable()
+          ->size(TextSize::Large)
+
           ->searchable()
           ->label('السعر')
           ->money('USD', locale: 'en'),
