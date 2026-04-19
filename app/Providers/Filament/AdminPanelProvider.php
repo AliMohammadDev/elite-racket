@@ -41,9 +41,8 @@ class AdminPanelProvider extends PanelProvider
         NavigationGroup::make()->label('إدارة المستخدمين'),
       ])
       ->login()
-
       ->brandName(new HtmlString('<span style="font-style: italic; font-weight: bold; font-family: serif;">Elite Racket</span>'))
-      ->brandLogo(asset('logo.png'))
+      ->brandLogo(asset('logo-dark.png'))
       ->darkModeBrandLogo(asset('logo.png'))
       ->favicon(asset('logo.png'))
       ->brandLogoHeight('3rem')

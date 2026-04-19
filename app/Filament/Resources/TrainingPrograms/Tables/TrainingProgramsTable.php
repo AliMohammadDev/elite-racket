@@ -60,15 +60,12 @@ class TrainingProgramsTable
           ->getStateUsing(fn($record) => Carbon::parse($record->start_date)->format('d/m/Y'))
           ->icon('heroicon-m-calendar-days')
           ->size(TextSize::Large)
-
           ->color('gray'),
 
         TextColumn::make('users_count')
           ->label('السعة المتاحة')
-          ->numeric()
           ->alignCenter()
           ->size(TextSize::Large)
-
           ->description('مشترك كحد أقصى')
           ->color('info')
           ->icon('heroicon-m-users'),

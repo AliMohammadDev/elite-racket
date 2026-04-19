@@ -6,6 +6,7 @@ use App\Filament\Resources\Courts\Pages\CreateCourt;
 use App\Filament\Resources\Courts\Pages\EditCourt;
 use App\Filament\Resources\Courts\Pages\ListCourts;
 use App\Filament\Resources\Courts\Pages\ViewCourt;
+use App\Filament\Resources\Courts\RelationManagers\BookingsRelationManager;
 use App\Filament\Resources\Courts\Schemas\CourtForm;
 use App\Filament\Resources\Courts\Schemas\CourtInfolist;
 use App\Filament\Resources\Courts\Tables\CourtsTable;
@@ -44,7 +45,7 @@ class CourtResource extends Resource
   public static function getRelations(): array
   {
     return [
-      //
+      BookingsRelationManager::class,
     ];
   }
 
