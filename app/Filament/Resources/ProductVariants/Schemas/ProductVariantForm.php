@@ -37,11 +37,25 @@ class ProductVariantForm
                   ->options(Size::pluck('size', 'id'))
                   ->searchable()
                   ->required(),
+
+
                 TextInput::make('sku')
                   ->label('رمز الـ SKU')
+                  ->placeholder('مثال: SHIRT-RED-L')
                   ->unique(ignoreRecord: true)
                   ->required()
+                  ->live()
+                  ->helperText('هذا الرمز الإداري الخاص بالخيار')
+                  ->extraInputAttributes(['style' => 'text-transform: uppercase'])
                   ->dehydrateStateUsing(fn($state) => strtoupper($state)),
+
+
+                // TextInput::make('sku')
+                //   ->label('رمز الـ SKU')
+                //   ->unique(ignoreRecord: true)
+                //   ->required()
+                //   ->live()
+                //   ->dehydrateStateUsing(fn($state) => strtoupper($state)),
 
                 TextInput::make('price')
                   ->label('السعر')
@@ -209,8 +223,18 @@ class ProductVariantForm
                   ->required(),
 
                 TextInput::make('sku')
-                  ->label('رمز الـ SKU')
-                  ->required(),
+                  ->label('SKU')
+                  ->required()
+                  ->unique(table: 'product_variants', column: 'sku')
+                  ->extraInputAttributes(['style' => 'text-transform: uppercase'])
+                  ->dehydrateStateUsing(fn($state) => strtoupper($state)),
+
+                TextInput::make('barcode')
+                  ->label('الباركود')
+                  ->unique(table: 'product_variants', column: 'barcode')
+                  ->prefixIcon('heroicon-m-qr-code')
+                  ->placeholder('barcode'),
+
 
                 TextInput::make('price')
                   ->label('السعر')
@@ -226,6 +250,7 @@ class ProductVariantForm
                   ->reorderable()
                   ->image()
                   ->directory('temp_variants')
+                  ->columnSpan(2)
                   ->disk('public')
               ]),
           ])

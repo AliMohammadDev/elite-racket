@@ -61,24 +61,26 @@ class TrainingProgramForm
 
             ]),
 
-            Grid::make(2)->schema([
-              DatePicker::make('start_date')
-                ->label('تاريخ بدء البرنامج')
-                ->native(false)
-                ->displayFormat('d/m/Y')
-                ->required(),
+            Grid::make(2)
+              ->schema([
+                DatePicker::make('start_date')
+                  ->label('تاريخ بدء البرنامج')
+                  ->native(false)
+                  ->displayFormat('d/m/Y')
+                  ->required(),
 
-              DatePicker::make('end_date')
-                ->label('تاريخ انتهاء البرنامج')
-                ->native(false)
-                ->displayFormat('d/m/Y')
-                ->after('start_date')
-                ->required(),
-            ]),
+                DatePicker::make('end_date')
+                  ->label('تاريخ انتهاء البرنامج')
+                  ->native(false)
+                  ->displayFormat('d/m/Y')
+                  ->after('start_date')
+                  ->required(),
+              ]),
 
-            Section::make('Media')
+            Section::make('صور البرامج التدريبية')
               ->schema([
                 SpatieMediaLibraryFileUpload::make('image')
+                  ->label('صورة البرنامج التدريبي')
                   ->collection('training_programs')
                   ->disk('public')
                   ->image()

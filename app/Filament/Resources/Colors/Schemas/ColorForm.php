@@ -18,7 +18,7 @@ class ColorForm
           ->schema([
             TextInput::make('color')
               ->label('اسم اللون')
-              ->placeholder('مثلاً: أحمر، أزرق...')
+              ->placeholder('yellow')
               ->required()
               ->maxLength(255),
 

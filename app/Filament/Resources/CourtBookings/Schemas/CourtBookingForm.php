@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\CourtBookings\Schemas;
 
 use App\Models\Court;
+use App\Models\Time;
 use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
@@ -54,18 +55,45 @@ class CourtBookingForm
 
         Section::make('التوقيت والمدرب')
           ->schema([
-
             Select::make('times')
               ->label('الساعات المطلوبة')
               ->relationship('times', 'from')
               ->multiple()
-              ->getOptionLabelFromRecordUsing(
-                fn($record) =>
-                Carbon::parse($record->from)->format('h:i A') . ' - ' .
-                Carbon::parse($record->to)->format('h:i A')
-              )
+              ->allowHtml()
+              ->getOptionLabelFromRecordUsing(function ($record, $get) {
+                $label =
+                  Carbon::parse($record->from)->format('h:i A') . ' - ' .
+                  Carbon::parse($record->to)->format('h:i A');
+                $courtId = $get('court_id');
+                $date = $get('booking_date');
+                if (!$courtId || !$date) {
+                  return $label;
+                }
+                $isBooked = $record->courtBookings()
+                  ->where('court_id', $courtId)
+                  ->whereDate('booking_date', $date)
+                  ->whereIn('status', ['approved', 'pending'])
+                  ->exists();
+                if ($isBooked) {
+                  return "<span style='color:red;font-weight:bold;'>$label (محجوز)</span>";
+                }
+                return $label;
+              })
               ->live()
               ->preload()
+              ->disableOptionWhen(function ($value, $get) {
+                $courtId = $get('court_id');
+                $date = $get('booking_date');
+                if (!$courtId || !$date) {
+                  return false;
+                }
+                return Time::where('id', $value)
+                  ->whereHas('courtBookings', function ($query) use ($courtId, $date) {
+                    $query->where('court_id', $courtId)
+                      ->whereDate('booking_date', $date)
+                      ->whereIn('status', ['approved', 'pending']);
+                  })->exists();
+              })
               ->afterStateUpdated(function ($state, $set, $get) {
                 $court = Court::find($get('court_id'));
                 if ($court && !empty($state)) {
@@ -75,6 +103,7 @@ class CourtBookingForm
                 }
               })
               ->required(),
+
 
             Select::make('couch_id')
               ->label('الكوتش')

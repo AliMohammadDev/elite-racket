@@ -20,7 +20,7 @@ use UnitEnum;
 class ProductVariantResource extends Resource
 {
   protected static ?string $model = ProductVariant::class;
-  protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+  protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-tag';
   protected static ?string $recordTitleAttribute = 'ProductVariant';
   protected static string|UnitEnum|null $navigationGroup = 'إدارة المنتجات';
   protected static ?string $navigationLabel = 'خيار المنتجات';

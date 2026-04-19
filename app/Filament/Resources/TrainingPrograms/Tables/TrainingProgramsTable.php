@@ -114,6 +114,6 @@ class TrainingProgramsTable
         BulkActionGroup::make([
           DeleteBulkAction::make(),
         ]),
-      ]);
+      ])->defaultSort('created_at', 'desc');
   }
 }

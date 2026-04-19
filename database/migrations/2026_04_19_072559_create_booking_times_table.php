@@ -15,7 +15,7 @@ return new class extends Migration {
     Schema::create('booking_times', function (Blueprint $table) {
       $table->id();
       $table->foreignIdFor(Time::class)->constrained();
-      $table->foreignIdFor(CourtBooking::class)->constrained();
+      $table->foreignIdFor(CourtBooking::class)->constrained()->onDelete('cascade');
       $table->timestamps();
     });
   }

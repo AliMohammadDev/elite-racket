@@ -23,18 +23,19 @@ class CourtForm
                 ->label('Name (English)')
                 ->required(),
             ]),
-            Grid::make(2)->schema([
-              TextInput::make('price')
-                ->label('السعر الأساسي')
-                ->numeric()
-                ->prefix('$')
-                ->required(),
-              TextInput::make('discounts')
-                ->label('الخصم (%)')
-                ->numeric()
-                ->default(0)
-                ->maxValue(100),
-            ]),
+            Grid::make(2)
+              ->schema([
+                TextInput::make('price')
+                  ->label('السعر الأساسي')
+                  ->numeric()
+                  ->prefix('$')
+                  ->required(),
+                TextInput::make('discounts')
+                  ->label('الخصم (%)')
+                  ->numeric()
+                  ->default(0)
+                  ->maxValue(100),
+              ]),
           ]),
       ])->columns(1);
   }

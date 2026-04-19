@@ -34,6 +34,7 @@ class ProductInfolist
                   ->label('القسم')
                   ->badge()
                   ->color('info')
+                  ->size(TextSize::Large)
                   ->state(function ($record) {
                     return $record->category?->name['ar'] ?? $record->category?->name['en'] ?? 'غير مصنف';
                   }),
@@ -41,29 +42,30 @@ class ProductInfolist
                 TextEntry::make('created_at')
                   ->label('تاريخ الإضافة')
                   ->dateTime()
-                  ->color('gray')
+                  ->color('success')
                   ->size(TextSize::Large),
               ]),
 
 
             Section::make('وصف المنتج')
               ->icon('heroicon-o-document-text')
+
               ->schema([
-                TextEntry::make('body.ar')
-                  ->label('الوصف بالعربية')
-                  ->color('primary')
+                Grid::make(2)
+                  ->schema([
+                    TextEntry::make('body.ar')
+                      ->label('الوصف بالعربية')
+                      ->color('primary')
+                      ->html()
+                      ->placeholder('لا يوجد وصف متاح بالعربية')
+                      ->size(TextSize::Large),
 
-                  ->html()
-                  ->placeholder('لا يوجد وصف متاح بالعربية')
-                  ->columnSpanFull()
-                  ->size(TextSize::Large),
-
-                TextEntry::make('body.en')
-                  ->label('Description (English)')
-                  ->html()
-                  ->placeholder('No English description available')
-                  ->columnSpanFull()
-                  ->size(TextSize::Large),
+                    TextEntry::make('body.en')
+                      ->label('Description (English)')
+                      ->html()
+                      ->placeholder('No English description available')
+                      ->size(TextSize::Large),
+                  ])
               ])
               ->collapsible(),
           ]),

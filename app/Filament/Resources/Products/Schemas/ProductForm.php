@@ -18,7 +18,7 @@ class ProductForm
         Section::make('معلومات المنتج الأساسية')
           ->schema([
             Select::make('category_id')
-              ->label('القسم')
+              ->label('الصنف')
               ->relationship('category', 'name->ar')
               ->required()
               ->searchable()
@@ -44,7 +44,7 @@ class ProductForm
               ->label('Product Description (EN)')
               ->columnSpanFull(),
           ])
-          ->columns(1),
-      ]);
+
+      ])->columns(1);
   }
 }
