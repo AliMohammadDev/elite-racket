@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class SubscriptionChart extends ChartWidget
 {
-  protected ?string $heading = 'Subscription Chart';
+  protected ?string $heading = 'إحصائيات الاشتراكات الشهرية';
 
   protected int|string|array $columnSpan = 1;
 
