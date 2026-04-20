@@ -22,7 +22,8 @@ class TrainingProgramResource extends Resource
   protected static ?string $model = TrainingProgram::class;
   protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
   protected static ?string $recordTitleAttribute = 'TrainingProgram';
-  protected static string|UnitEnum|null $navigationGroup = 'إدارة البرامج التدريبية';
+  protected static string|UnitEnum|null $navigationGroup = 'إدارة المدربين الرياضيين';
+  protected static ?int $navigationSort = 2;
   protected static ?string $navigationLabel = 'البرامج التدريبية';
   protected static ?string $modelLabel = 'برنامج تدريبي';
   protected static ?string $pluralModelLabel = 'البرامج التدريبية';

@@ -22,7 +22,7 @@ class TimeResource extends Resource
   protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clock';
   protected static ?string $recordTitleAttribute = 'TimeResource';
   protected static string|UnitEnum|null $navigationGroup = 'إدارة المواعيد';
-  protected static ?string $navigationLabel = 'توقيتات العمل';
+  protected static ?string $navigationLabel = 'ساعات العمل';
   protected static ?string $modelLabel = 'توقيت';
   protected static ?string $pluralModelLabel = 'المواعيد';
 

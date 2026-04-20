@@ -21,7 +21,8 @@ class TrainingSubscriptionResource extends Resource
   protected static ?string $model = TrainingSubscription::class;
   protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-check';
   protected static ?string $recordTitleAttribute = 'TrainingSubscription';
-  protected static string|UnitEnum|null $navigationGroup = 'إدارة الاشتراكات';
+  protected static string|UnitEnum|null $navigationGroup = 'إدارة الملاعب';
+  protected static ?int $navigationSort = 3;
   protected static ?string $navigationLabel = 'اشتراكات البرامج';
   protected static ?string $modelLabel = 'اشتراك';
   protected static ?string $pluralModelLabel = 'اشتراكات البرامج التدريبية';

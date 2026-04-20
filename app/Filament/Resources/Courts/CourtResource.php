@@ -23,6 +23,7 @@ class CourtResource extends Resource
   protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-trophy';
   protected static ?string $recordTitleAttribute = 'Court';
   protected static string|UnitEnum|null $navigationGroup = 'إدارة الملاعب';
+  protected static ?int $navigationSort = 1;
   protected static ?string $navigationLabel = 'الملاعب';
   protected static ?string $modelLabel = 'ملعب';
   protected static ?string $pluralModelLabel = 'الملاعب';
