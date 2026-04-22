@@ -37,6 +37,15 @@ class TrainingProgramsTable
           ->searchable()
           ->sortable(),
 
+
+        TextColumn::make('sportType.name.ar')
+          ->label('نوع الرياضة')
+          ->size(TextSize::Large)
+          ->searchable()
+          ->badge()
+          ->color('info')
+          ->sortable(),
+
         TextColumn::make('train_level')
           ->label('المستوى')
           ->formatStateUsing(fn(string $state): string => match ($state) {
@@ -100,8 +109,11 @@ class TrainingProgramsTable
         SelectFilter::make('couch_id')
           ->label('الكوتش')
           ->relationship('couch', 'id')
-
           ->getOptionLabelFromRecordUsing(fn($record) => $record->name[app()->getLocale()] ?? $record->name['en']),
+
+        SelectFilter::make('sport_type_id')
+          ->label('تصفية حسب نوع الرياضة')
+          ->relationship('sportType', 'name->ar'),
       ])
       ->recordActions([
         ViewAction::make(),

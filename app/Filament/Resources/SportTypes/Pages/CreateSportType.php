@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Categories\Pages;
+namespace App\Filament\Resources\SportTypes\Pages;
 
-use App\Filament\Resources\Categories\CategoryResource;
+use App\Filament\Resources\SportTypes\SportTypeResource;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Actions;
 
 
-class CreateCategory extends CreateRecord
+class CreateSportType extends CreateRecord
 {
-  protected static string $resource = CategoryResource::class;
+  protected static string $resource = SportTypeResource::class;
 
   protected function getHeaderActions(): array
   {
@@ -25,4 +25,5 @@ class CreateCategory extends CreateRecord
   {
     return $this->getResource()::getUrl('index');
   }
+
 }

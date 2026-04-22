@@ -22,6 +22,7 @@ class TrainingProgramResource extends JsonResource
       'final_price' => $this->final_price,
       'level' => $this->train_level,
       'couch' => new CouchResource($this->whenLoaded('couch')),
+      'sport_type' => new SportTypeResource($this->whenLoaded('sportType')),
       'created_at' => $this->created_at->format('Y-m-d'),
       'image' => $this->getFirstMediaUrl('training_programs', 'default'),
       'all_images' => $this->getMedia('training_programs')->map(function ($media) {

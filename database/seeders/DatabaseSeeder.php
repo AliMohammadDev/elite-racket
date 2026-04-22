@@ -21,13 +21,14 @@ class DatabaseSeeder extends Seeder
     $this->call([
       AdminSeeder::class,
       UserSeeder::class,
+      SportTypeSeeder::class,
       CategorySeeder::class,
       ProductSeeder::class,
       CourtSeeder::class,
       CouchSeeder::class,
       TrainingProgramSeeder::class,
       TrainingSubscriptionSeeder::class,
-      TimeSeeder::class
+      TimeSeeder::class,
     ]);
 
 

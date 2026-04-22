@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Couch;
+use App\Models\SportType;
 use App\Models\TrainingProgram;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
@@ -15,6 +16,7 @@ class TrainingProgramSeeder extends Seeder
   public function run(): void
   {
     $couches = Couch::all();
+    $sportTypes = SportType::all();
 
     if ($couches->isEmpty()) {
       $this->command->warn('يرجى تشغيل CouchSeeder أولاً!');
@@ -58,12 +60,15 @@ class TrainingProgramSeeder extends Seeder
         ],
       ];
 
-      foreach ($programs as $index => $programData) {
+      foreach ($programs as $programData) {
         $startDate = Carbon::now()->addDays(rand(1, 10));
         $endDate = (clone $startDate)->addMonths(rand(1, 3));
 
+        $randomSportType = $sportTypes->random();
+
         TrainingProgram::create([
           'name' => $programData['name'],
+          'sport_type_id' => $randomSportType->id,
           'price' => $programData['price'],
           'discounts' => $programData['discounts'],
           'couch_id' => $couch->id,

@@ -18,6 +18,7 @@ class TrainingProgram extends Model implements HasMedia
 
   protected $fillable = [
     'name',
+    'sport_type_id',
     'price',
     'discounts',
     'couch_id',
@@ -57,6 +58,11 @@ class TrainingProgram extends Model implements HasMedia
   public function getRemainingSlotsAttribute(): int
   {
     return max(0, $this->users_count - $this->subscriptions()->count());
+  }
+
+  public function sportType()
+  {
+    return $this->belongsTo(SportType::class);
   }
 
   public function couch()

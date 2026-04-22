@@ -1,30 +1,22 @@
 <?php
 
-namespace App\Filament\Resources\Products\Schemas;
+namespace App\Filament\Resources\SportTypes\Schemas;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 
-class ProductForm
+class SportTypeForm
 {
   public static function configure(Schema $schema): Schema
   {
     return $schema
       ->components([
-        Section::make('معلومات المنتج الأساسية')
+        Section::make('معلومات أنواع الرياضية الأساسية')
           ->schema([
-            Select::make('category_id')
-              ->label('الصنف')
-              ->relationship('category', 'name->ar')
-              ->required()
-              ->searchable()
-              ->preload()
-              ->columnSpanFull(),
-
             Grid::make(2)
               ->schema([
                 TextInput::make('name.ar')

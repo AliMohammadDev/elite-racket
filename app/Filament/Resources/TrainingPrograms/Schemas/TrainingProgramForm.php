@@ -23,7 +23,7 @@ class TrainingProgramForm
               TextInput::make('name.en')->label('Name (English)')->required(),
             ]),
 
-            Grid::make(2)->schema([
+            Grid::make(1)->schema([
               Select::make('couch_id')
                 ->label('الكوتش المسؤل')
                 ->relationship('couch', 'name')
@@ -31,6 +31,16 @@ class TrainingProgramForm
                 ->searchable()
                 ->preload()
                 ->required(),
+
+
+              Select::make('sport_type_id')
+                ->label('نوع الرياضية')
+                ->relationship('sportType', 'name->ar')
+                ->required()
+                ->searchable()
+                ->preload()
+                ->columnSpanFull(),
+
 
               Select::make('train_level')
                 ->label('مستوى التدريب')

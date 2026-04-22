@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Services;
-
 use App\Models\TrainingProgram;
 
 class TrainingProgramService
 {
   public function findAll()
   {
-    return TrainingProgram::with('couch')
+    return TrainingProgram::with(['couch', 'sportType'])
       ->latest()
       ->get();
   }
