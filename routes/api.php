@@ -15,6 +15,8 @@ use App\Http\Controllers\Api\CouchController;
 use App\Http\Controllers\Api\CourtController;
 use App\Http\Controllers\Api\TrainingProgramController;
 use App\Http\Controllers\Api\TrainingSubscriptionController;
+use App\Http\Controllers\Api\SportTypeController;
+use App\Http\Controllers\Api\TimeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +34,6 @@ Route::middleware(['setLocale'])->group(function () {
   Route::post('contact-us', [ContactController::class, 'send'])->middleware('throttle:5,1');
   Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
   Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']);
-
-
 
   // Auth
   Route::post('register', [AuthController::class, 'register']);
@@ -72,6 +72,14 @@ Route::middleware(['setLocale'])->group(function () {
 
   Route::get('subscriptions', [TrainingSubscriptionController::class, 'index']);
 
+  // Sport Types
+  Route::get('sport-types', [SportTypeController::class, 'index']);
+  Route::get('sport-types/{sport_type}', [SportTypeController::class, 'show']);
+
+  // Times
+  Route::get('times', [TimeController::class, 'index']);
+  Route::get('times/{time}', [TimeController::class, 'show']);
+
 });
 
 
@@ -88,7 +96,7 @@ Route::middleware(['setLocale', 'auth:sanctum'])->group(function () {
 
   Route::post('subscriptions', [TrainingSubscriptionController::class, 'store']);
 
-   Route::get('my-subscriptions', [TrainingSubscriptionController::class, 'index']);
+  Route::get('my-subscriptions', [TrainingSubscriptionController::class, 'index']);
 
 });
 
@@ -117,14 +125,21 @@ Route::middleware(['setLocale', 'auth:sanctum'])->group(function () {
   Route::apiResource('sizes', SizeController::class)
     ->except(['index']);
 
-  Route::apiResource('courts', CourtController::class)->except(['index', 'show']);
-  Route::apiResource('couches', CouchController::class)->except(['index', 'show']);
+  Route::apiResource('courts', CourtController::class)
+    ->except(['index', 'show']);
+  Route::apiResource('couches', CouchController::class)
+    ->except(['index', 'show']);
 
   Route::apiResource('training-programs', TrainingProgramController::class)
     ->except(['index', 'show']);
 
   Route::apiResource('all-subscriptions', TrainingSubscriptionController::class)
     ->except(['store']);
+
+  Route::apiResource('sport-types', SportTypeController::class)
+    ->except(['index', 'show']);
+  Route::apiResource('times', TimeController::class)
+    ->except(['index', 'show']);
 
 
 });
