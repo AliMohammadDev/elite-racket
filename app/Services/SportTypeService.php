@@ -15,19 +15,19 @@ class SportTypeService
     return SportType::create($data);
   }
 
-  public function findOne(SportType $product)
+  public function findOne(SportType $sportType)
   {
-    return $product;
+    return $sportType;
   }
 
-  public function updateSportType(SportType $product, array $data)
+  public function updateSportType(SportType $sportType, array $data)
   {
-    $product->update($data);
-    return $product;
+    $sportType->update($data);
+    return $sportType;
   }
 
-  public function deleteSportType(SportType $product)
+  public function deleteSportType(SportType $sportType)
   {
-    return $product->delete();
+    return $sportType->delete();
   }
 }

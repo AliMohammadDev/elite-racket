@@ -18,7 +18,7 @@ class TrainingProgramResource extends JsonResource
       'id' => $this->id,
       'name' => $this->translated_name,
       'price' => $this->price,
-      'discount' => $this->discounts . '%',
+      'discount' => $this->discounts,
       'final_price' => $this->final_price,
       'level' => $this->train_level,
       'couch' => new CouchResource($this->whenLoaded('couch')),

@@ -20,6 +20,8 @@ class Court extends Model
 
   protected $casts = [
     'name' => 'array',
+    'price' => 'double',
+    'discounts' => 'double',
   ];
 
   protected function translatedName(): Attribute

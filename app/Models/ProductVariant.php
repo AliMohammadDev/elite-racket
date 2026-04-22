@@ -20,6 +20,12 @@ class ProductVariant extends Model
     'barcode'
   ];
 
+
+  protected $casts = [
+    'price' => 'double',
+    'discounts' => 'double',
+  ];
+
   public function images()
   {
     return $this->hasMany(ProductVariantImage::class, 'product_variant_id');
