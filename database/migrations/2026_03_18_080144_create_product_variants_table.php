@@ -23,6 +23,8 @@ return new class extends Migration {
       $table->integer('stock_quantity')->default(0);
       $table->string('sku')->unique();
       $table->string('barcode')->nullable()->unique();
+
+
       $table->timestamps();
 
       $table->unique(['product_id', 'color_id', 'size_id'], 'product_variant_unique');

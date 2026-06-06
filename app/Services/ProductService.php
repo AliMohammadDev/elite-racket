@@ -10,6 +10,15 @@ class ProductService
   {
     return Product::with('category')->get();
   }
+
+  public function findFeatured()
+  {
+    return Product::with('category')
+      ->where('is_featured', true)
+      ->latest() 
+      ->get();
+  }
+
   public function createProduct(array $data)
   {
     return Product::create($data);
@@ -30,5 +39,4 @@ class ProductService
   {
     return $product->delete();
   }
-
 }

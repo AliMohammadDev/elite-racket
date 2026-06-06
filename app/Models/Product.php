@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
   use HasFactory;
-  protected $fillable = ['name', 'body', 'category_id'];
+  protected $fillable = ['name', 'body', 'category_id', 'is_featured'];
 
   public function category()
   {
@@ -25,6 +25,8 @@ class Product extends Model
   protected $casts = [
     'name' => 'array',
     'body' => 'array',
+    'is_featured' => 'boolean',
+
   ];
 
   public function getTranslatedNameAttribute(): string
@@ -36,5 +38,4 @@ class Product extends Model
   {
     return $this->body[app()->getLocale()] ?? $this->body['en'] ?? '';
   }
-
 }

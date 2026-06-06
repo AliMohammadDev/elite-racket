@@ -7,6 +7,7 @@ use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\RichEditor;
 use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 
 class ProductForm
@@ -42,6 +43,11 @@ class ProductForm
 
             RichEditor::make('body.en')
               ->label('Product Description (EN)')
+              ->columnSpanFull(),
+
+            Toggle::make('is_featured')
+              ->label('منتج مميز (Featured)')
+              ->default(false)
               ->columnSpanFull(),
           ])
 

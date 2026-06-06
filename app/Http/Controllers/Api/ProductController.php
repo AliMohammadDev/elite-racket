@@ -12,17 +12,21 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-  public function __construct
-  (
+  public function __construct(
     private ProductService $productService
-  ) {
-  }
+  ) {}
 
 
   public function index()
   {
     $products = $this->productService->findAll();
     return ProductResource::collection($products);
+  }
+
+  public function featured()
+  {
+    $featuredProducts = $this->productService->findFeatured();
+    return ProductResource::collection($featuredProducts);
   }
 
   public function store(CreateProductRequest $request)
@@ -57,7 +61,4 @@ class ProductController extends Controller
     $product = $this->productService->deleteProduct($product);
     return response()->json(['message' => 'Product deleted successfully']);
   }
-
-
-
 }

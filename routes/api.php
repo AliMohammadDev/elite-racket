@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\TimeController;
 | Public API (NO AUTH)
 |--------------------------------------------------------------------------
 */
+
 Route::middleware(['setLocale'])->group(function () {
 
 
@@ -45,6 +46,7 @@ Route::middleware(['setLocale'])->group(function () {
 
   // Products
   Route::get('products', [ProductController::class, 'index']);
+  Route::get('products/featured', [ProductController::class, 'featured']);
   Route::get('products/{product}', [ProductController::class, 'show']);
   Route::get('products-sliders', [ProductController::class, 'sliders']);
 
@@ -79,7 +81,6 @@ Route::middleware(['setLocale'])->group(function () {
   // Times
   Route::get('times', [TimeController::class, 'index']);
   Route::get('times/{time}', [TimeController::class, 'show']);
-
 });
 
 
@@ -97,7 +98,6 @@ Route::middleware(['setLocale', 'auth:sanctum'])->group(function () {
   Route::post('subscriptions', [TrainingSubscriptionController::class, 'store']);
 
   Route::get('my-subscriptions', [TrainingSubscriptionController::class, 'index']);
-
 });
 
 
@@ -140,6 +140,4 @@ Route::middleware(['setLocale', 'auth:sanctum'])->group(function () {
     ->except(['index', 'show']);
   Route::apiResource('times', TimeController::class)
     ->except(['index', 'show']);
-
-
 });

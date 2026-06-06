@@ -17,7 +17,7 @@ class ProductVariant extends Model
     'discount',
     'stock_quantity',
     'sku',
-    'barcode'
+    'barcode',
   ];
 
 
@@ -88,5 +88,4 @@ class ProductVariant extends Model
   {
     return $this->belongsTo(Size::class);
   }
-
 }

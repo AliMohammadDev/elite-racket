@@ -16,6 +16,8 @@ return new class extends Migration {
       $table->json('name');
       $table->json('body');
       $table->foreignIdFor(Category::class);
+      $table->boolean('is_featured')->default(false);
+
       $table->timestamps();
     });
   }

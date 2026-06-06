@@ -8,6 +8,7 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
 use Filament\Support\Enums\FontWeight;
+use Filament\Infolists\Components\IconEntry;
 use Filament\Support\Enums\TextSize;
 
 class ProductInfolist
@@ -38,6 +39,15 @@ class ProductInfolist
                   ->state(function ($record) {
                     return $record->category?->name['ar'] ?? $record->category?->name['en'] ?? 'غير مصنف';
                   }),
+
+                IconEntry::make('is_featured')
+                  ->label('منتج مميز')
+                  ->boolean()
+                  ->trueIcon('heroicon-o-star')
+                  ->falseIcon('heroicon-o-x-circle')
+                  ->trueColor('warning')
+                  ->falseColor('gray'),
+
 
                 TextEntry::make('created_at')
                   ->label('تاريخ الإضافة')
