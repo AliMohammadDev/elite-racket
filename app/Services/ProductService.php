@@ -8,14 +8,19 @@ class ProductService
 {
   public function findAll()
   {
-    return Product::with('category')->get();
+    return Product::with([
+      'variants.color',
+      'variants.size',
+      'variants.images',
+      'category'
+    ])->get();
   }
 
   public function findFeatured()
   {
     return Product::with('category')
       ->where('is_featured', true)
-      ->latest() 
+      ->latest()
       ->get();
   }
 
