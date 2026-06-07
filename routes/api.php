@@ -95,6 +95,8 @@ Route::middleware(['setLocale', 'auth:sanctum'])->group(function () {
   Route::get('me', [AuthController::class, 'me']);
   Route::put('profile', [AuthController::class, 'updateProfile']);
 
+  Route::post('logout', [AuthController::class, 'logout']);
+
   Route::post('subscriptions', [TrainingSubscriptionController::class, 'store']);
 
   Route::get('my-subscriptions', [TrainingSubscriptionController::class, 'index']);

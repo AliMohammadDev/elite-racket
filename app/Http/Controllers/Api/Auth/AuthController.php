@@ -13,8 +13,7 @@ class AuthController extends Controller
 {
   public function __construct(
     private AuthService $authService
-  ) {
-  }
+  ) {}
   public function register(CreateUserRequest $request)
   {
     $result = $this->authService->registerUser($request->validated());
@@ -50,5 +49,19 @@ class AuthController extends Controller
       'message' => 'Profile updated successfully',
       'user' => $user,
     ]);
+  }
+
+  public function logout()
+  {
+    /** @var \App\Models\User $user */
+    $user = Auth::user();
+
+    if ($user) {
+      $user->currentAccessToken()->delete();
+    }
+
+    return response()->json([
+      'message' => 'Logged out successfully',
+    ], 200);
   }
 }
