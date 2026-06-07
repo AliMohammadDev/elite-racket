@@ -12,7 +12,7 @@ class AuthService
     $user = User::create([
       'name' => $data['name'],
       'email' => $data['email'],
-
+      'phone' => $data['phone'],
       'password' => Hash::make($data['password']),
     ]);
     $user->assignRole('customer');
