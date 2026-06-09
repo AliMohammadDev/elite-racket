@@ -23,7 +23,7 @@ class ProductVariant extends Model
 
   protected $casts = [
     'price' => 'double',
-    'discounts' => 'double',
+    'discount' => 'double',
   ];
 
   public function images()

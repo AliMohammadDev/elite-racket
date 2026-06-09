@@ -67,4 +67,13 @@ class User extends Authenticatable
       'training_program_id'
     );
   }
+
+  public function cart()
+  {
+    return $this->hasOne(Cart::class);
+  }
+  public function cartItems()
+  {
+    return $this->hasManyThrough(CartItem::class, Cart::class);
+  }
 }

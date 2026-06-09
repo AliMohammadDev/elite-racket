@@ -33,6 +33,7 @@ class UpdateUserRequest extends FormRequest
         'max:255',
         'unique:users,email,' . $this->route('user')->id
       ],
+      'phone' => ['nullable', 'string', 'max:20'],
       'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
     ];
   }

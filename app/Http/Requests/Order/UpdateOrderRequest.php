@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Order;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules;
 
-class UpdateProfileRequest extends FormRequest
+class UpdateOrderRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -24,10 +23,7 @@ class UpdateProfileRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => ['sometimes', 'string', 'max:255'],
-      'email' => ['sometimes', 'email', 'unique:users,email,' . auth()->id()],
-      'phone' => ['nullable', 'string', 'max:20'],
-      'password' => ['nullable', 'confirmed', 'min:6'],
+      'status' => ['required', 'in:cancelled'],
     ];
   }
 }

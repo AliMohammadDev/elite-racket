@@ -39,7 +39,7 @@ class AuthService
 
   public function updateProfile(User $user, array $data): User
   {
-    $filteredData = collect($data)->only(['name', 'email', 'password'])->filter()->toArray();
+    $filteredData = collect($data)->only(['name', 'email', 'password', 'phone'])->filter()->toArray();
 
     if (isset($filteredData['password'])) {
       $filteredData['password'] = Hash::make($filteredData['password']);

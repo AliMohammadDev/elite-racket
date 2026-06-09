@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\socialAuthController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ColorController;
 use App\Http\Controllers\Api\ContactController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CouchController;
 use App\Http\Controllers\Api\CourtController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\TrainingProgramController;
 use App\Http\Controllers\Api\TrainingSubscriptionController;
 use App\Http\Controllers\Api\SportTypeController;
@@ -94,13 +96,24 @@ Route::middleware(['setLocale', 'auth:sanctum'])->group(function () {
   // User
   Route::get('me', [AuthController::class, 'me']);
   Route::put('profile', [AuthController::class, 'updateProfile']);
-
   Route::post('logout', [AuthController::class, 'logout']);
-
   Route::post('subscriptions', [TrainingSubscriptionController::class, 'store']);
-
   Route::get('my-subscriptions', [TrainingSubscriptionController::class, 'index']);
+
+  // Cart
+  Route::get('/cart', [CartController::class, 'index']);
+  Route::post('/cart', [CartController::class, 'store']);
+  Route::put('/cart/{id}', [CartController::class, 'update']);
+  Route::delete('/cart/{id}', [CartController::class, 'destroy']);
+  Route::delete('/cart-clear', [CartController::class, 'clear']);
+
+  Route::get('/orders', [OrderController::class, 'index']);
+  Route::post('/orders', [OrderController::class, 'store']);
+  Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 });
+
+
+
 
 
 /*
