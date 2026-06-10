@@ -8,6 +8,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -23,9 +24,14 @@ class OrdersTable
         TextColumn::make('user.name')
           ->label('العميل')
           ->size(TextSize::Large)
-          ->weight('bold')        
+          ->weight('bold')
           ->searchable()
           ->sortable(),
+
+        TextColumn::make('user.phone')
+          ->label('رقم الهاتف')
+          ->size(TextSize::Large)
+          ->icon('heroicon-o-phone'),
 
         TextColumn::make('total_price')
           ->label('الإجمالي')
@@ -59,12 +65,26 @@ class OrdersTable
             'cancelled' => 'ملغي',
           ]),
       ])
-      ->actions([
-        ActionGroup::make([
-          ViewAction::make(),
-          EditAction::make(),
-          DeleteAction::make(),
+
+
+
+      ->recordActions([
+        ViewAction::make(),
+        EditAction::make(),
+      ])
+      ->toolbarActions([
+        BulkActionGroup::make([
+          DeleteBulkAction::make(),
         ]),
-      ]);
+      ])->defaultSort('created_at', 'desc');
+
+
+    // ->actions([
+    //   ActionGroup::make([
+    //     ViewAction::make(),
+    //     EditAction::make(),
+    //     DeleteAction::make(),
+    //   ]),
+    // ]);
   }
 }
