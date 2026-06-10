@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Support\Enums\TextSize;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -15,6 +16,12 @@ class CourtsTable
   {
     return $table
       ->columns([
+
+        SpatieMediaLibraryImageColumn::make('image')
+          ->collection('courts')
+          ->label('صور الملاعب')
+          ->circular(),
+
 
         TextColumn::make('name.' . app()->getLocale())
           ->label('الاسم')
@@ -46,9 +53,7 @@ class CourtsTable
           ->size(TextSize::Large)
           ->dateTime()
       ])
-      ->filters([
-
-      ])
+      ->filters([])
       ->recordActions([
         EditAction::make(),
       ])

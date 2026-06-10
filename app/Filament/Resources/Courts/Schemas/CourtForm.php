@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Courts\Schemas;
 
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -36,6 +37,16 @@ class CourtForm
                   ->default(0)
                   ->maxValue(100),
               ]),
+          ]),
+        Section::make('الصور')
+          ->schema([
+            SpatieMediaLibraryFileUpload::make('image')
+              ->collection('courts')
+              ->disk('public')
+              ->image()
+              ->multiple()
+              ->reorderable()
+              ->columnSpanFull(),
           ]),
       ])->columns(1);
   }

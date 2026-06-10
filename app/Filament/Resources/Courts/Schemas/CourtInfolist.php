@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Courts\Schemas;
 
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -42,6 +43,27 @@ class CourtInfolist
                 ->color('success'),
             ]),
           ]),
+
+
+        Section::make('صور الملاعب')
+          ->icon('heroicon-o-photo')
+          ->schema([
+            SpatieMediaLibraryImageEntry::make('image')
+              ->collection('courts')
+              ->hiddenLabel()
+              ->circular()
+              ->stacked()
+              ->limit(5)
+              ->columnSpanFull()
+              ->extraImgAttributes([
+                'alt' => 'صورة الملاعب',
+                'class' => 'shadow-lg object-cover mx-auto',
+                'style' => 'width: 100px; height: 100px;',
+              ]),
+          ]),
+
+
+
       ])->columns(1);
   }
 }

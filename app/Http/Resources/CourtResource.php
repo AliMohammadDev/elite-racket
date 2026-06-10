@@ -20,6 +20,10 @@ class CourtResource extends JsonResource
       'price' => $this->price,
       'discount' => $this->discounts,
       'final_price' => $this->final_price,
+      'image' => $this->getFirstMediaUrl('courts', 'default'),
+      'all_images' => $this->getMedia('courts')->map(function ($media) {
+        return $media->getUrl('default');
+      }),
     ];
   }
 }

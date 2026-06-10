@@ -22,7 +22,7 @@ class ProductVariantsTable
     return $table
       ->columns([
         ImageColumn::make('images.image')
-          ->label('الصورة')
+          ->label('صور المنتجات')
           ->circular()
           ->stacked()
           ->getStateUsing(function ($record) {

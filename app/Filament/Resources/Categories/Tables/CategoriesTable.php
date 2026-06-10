@@ -22,7 +22,7 @@ class CategoriesTable
       ->columns([
         SpatieMediaLibraryImageColumn::make('image')
           ->collection('categories')
-          ->label('Image')
+          ->label('صور الاصناف')
           ->circular(),
 
         TextColumn::make('name.ar')

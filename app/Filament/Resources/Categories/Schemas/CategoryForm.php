@@ -29,7 +29,7 @@ class CategoryForm
               ->label('Description in English'),
           ])->columns(2),
 
-        Section::make('Media')
+        Section::make('الصور')
           ->schema([
             SpatieMediaLibraryFileUpload::make('image')
               ->collection('categories')
@@ -40,6 +40,5 @@ class CategoryForm
               ->columnSpanFull(),
           ]),
       ]);
-
   }
 }
