@@ -37,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
         NavigationGroup::make()->label('إدارة المدربين الرياضيين')->collapsed(),
         NavigationGroup::make()->label('إدارة الملاعب')->collapsed(),
         NavigationGroup::make()->label('إدارة المواعيد')->collapsed(),
+        NavigationGroup::make()->label('إدارة الطلبات'),
         NavigationGroup::make()->label('إدارة البرامج التدريبية'),
         NavigationGroup::make()->label('إدارة الاشتراكات'),
         NavigationGroup::make()->label('إدارة المستخدمين'),
