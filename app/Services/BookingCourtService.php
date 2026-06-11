@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\BookingTime;
+use App\Models\Court;
 use App\Models\CourtBooking;
 use App\Models\Time;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,7 @@ class BookingCourtService
   public function create(array $data)
   {
     return DB::transaction(function () use ($data) {
-      $court = \App\Models\Court::find($data['court_id']);
+      $court = Court::find($data['court_id']);
       $timeIds = $data['time_ids'];
       $totalPrice = $court->final_price * count($timeIds);
 
