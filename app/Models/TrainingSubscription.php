@@ -19,5 +19,7 @@ class TrainingSubscription extends Model
   public function trainingProgram()
   {
     return $this->belongsTo(TrainingProgram::class, 'training_program_id');
+
+
   }
 }
