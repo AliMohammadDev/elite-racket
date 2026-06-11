@@ -38,5 +38,4 @@ class CourtBooking extends Model
   {
     return $this->belongsToMany(Time::class, 'booking_times');
   }
-
 }

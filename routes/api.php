@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\socialAuthController;
+use App\Http\Controllers\Api\BookingCourtController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ColorController;
@@ -83,6 +84,8 @@ Route::middleware(['setLocale'])->group(function () {
   // Times
   Route::get('times', [TimeController::class, 'index']);
   Route::get('times/{time}', [TimeController::class, 'show']);
+
+  Route::get('bookings/available-times', [BookingCourtController::class, 'getAvailableTimes']);
 });
 
 
@@ -110,6 +113,9 @@ Route::middleware(['setLocale', 'auth:sanctum'])->group(function () {
   Route::get('/orders', [OrderController::class, 'index']);
   Route::post('/orders', [OrderController::class, 'store']);
   Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
+
+
+  Route::post('bookings-court', [BookingCourtController::class, 'store']);
 });
 
 
