@@ -23,12 +23,12 @@ class TrainingSubscriptionsTable
   public static function configure(Table $table): Table
   {
     $getExcelExport = fn() => ExcelExport::make()
+      ->askForFilename()
       ->withColumns([
         Column::make('user.name')
           ->heading('المتدرب')
           ->formatStateUsing(fn($record) => $record->user?->name),
 
-        // إتاحة رقم الهاتف داخل ملف الإكسل المصدر
         Column::make('user.phone')
           ->heading('رقم الهاتف')
           ->formatStateUsing(fn($record) => $record->user?->phone ?? 'غير محدد'),
