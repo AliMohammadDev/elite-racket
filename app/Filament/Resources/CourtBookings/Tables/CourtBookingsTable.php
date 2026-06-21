@@ -13,11 +13,55 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Columns\Column;
 
 class CourtBookingsTable
 {
   public static function configure(Table $table): Table
   {
+    $statusOptions = [
+      'pending' => 'قيد الانتظار',
+      'approved' => 'مقبول',
+      'rejected' => 'مرفوض',
+      'completed' => 'مكتمل',
+    ];
+
+    $getExcelExport = fn() => ExcelExport::make()
+      ->askForFilename()
+      ->withColumns([
+        Column::make('user.name')
+          ->heading('العميل')
+          ->formatStateUsing(fn($record) => $record->user?->name),
+
+        Column::make('user.phone')
+          ->heading('رقم الهاتف')
+          ->formatStateUsing(fn($record) => $record->user?->phone ?? 'غير محدد'),
+
+        Column::make('court.translated_name')
+          ->heading('الملعب')
+          ->formatStateUsing(fn($record) => $record->court?->translated_name),
+
+        Column::make('booking_date')
+          ->heading('التاريخ')
+          ->formatStateUsing(fn($record) => $record->booking_date?->format('d/m/Y')),
+
+        Column::make('times_count')
+          ->heading('عدد الساعات')
+          ->formatStateUsing(fn($record) => $record->times_count ?? $record->times()->count()),
+
+        Column::make('total_price')
+          ->heading('الإجمالي')
+          ->formatStateUsing(fn($record) => '$' . number_format($record->total_price, 2)),
+
+        Column::make('status')
+          ->heading('الحالة')
+          ->formatStateUsing(fn($record) => $statusOptions[$record->status] ?? $record->status),
+      ]);
+
     return $table
       ->columns([
         TextColumn::make('user.name')
@@ -25,6 +69,12 @@ class CourtBookingsTable
           ->size(TextSize::Large)
           ->sortable()
           ->searchable(),
+
+        TextColumn::make('user.phone')
+          ->label('رقم الهاتف')
+          ->size(TextSize::Large)
+          ->searchable()
+          ->placeholder('غير محدد'),
 
         TextColumn::make('court.translated_name')
           ->size(TextSize::Large)
@@ -59,12 +109,7 @@ class CourtBookingsTable
           ->label('الحالة')
           ->sortable()
           ->searchable()
-          ->options([
-            'pending' => 'قيد الانتظار',
-            'approved' => 'مقبول',
-            'rejected' => 'مرفوض',
-            'completed' => 'مكتمل',
-          ])
+          ->options($statusOptions)
           ->selectablePlaceholder(false)
           ->extraAttributes(fn($state) => [
             'style' => match ($state) {
@@ -75,17 +120,11 @@ class CourtBookingsTable
               default => '',
             }
           ])
-
       ])
       ->filters([
         SelectFilter::make('status')
           ->label('حالة الحجز')
-          ->options([
-            'pending' => 'قيد الانتظار',
-            'approved' => 'مقبول',
-            'rejected' => 'مرفوض',
-            'completed' => 'مكتمل',
-          ]),
+          ->options($statusOptions),
 
         SelectFilter::make('court_id')
           ->label('الملعب')
@@ -118,10 +157,20 @@ class CourtBookingsTable
         ViewAction::make(),
         EditAction::make(),
       ])
-      ->toolbarActions([
+      ->headerActions([
+        ExportAction::make()
+          ->label('تصدير إلى إكسل')
+          ->color('success')
+          ->exports([$getExcelExport()]),
+      ])
+      ->bulkActions([
         BulkActionGroup::make([
           DeleteBulkAction::make(),
+          ExportBulkAction::make()
+            ->label('تصدير المحدد إلى إكسل')
+            ->exports([$getExcelExport()]),
         ]),
-      ])->defaultSort('created_at', 'desc');
+      ])
+      ->defaultSort('created_at', 'desc');
   }
 }
