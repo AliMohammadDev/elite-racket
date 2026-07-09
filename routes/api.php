@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Auth\socialAuthController;
 use App\Http\Controllers\Api\BookingCourtController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\ColorController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ProductController;
@@ -29,6 +30,8 @@ use App\Http\Controllers\Api\TimeController;
 
 Route::middleware(['setLocale'])->group(function () {
 
+
+  Route::post('/chat', ChatController::class);
 
   // Social Auth
   Route::get('/login-google', [socialAuthController::class, 'redirectToProvider']);

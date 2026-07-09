@@ -5,10 +5,13 @@ namespace App\Filament\Resources\Products\Schemas;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\RichEditor;
 use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
+use Filament\Forms\Components\Textarea;
+use Filament\Notifications\Notification;
+use Filament\Actions\Action;
+use App\Services\AiService;
 
 class ProductForm
 {
@@ -37,13 +40,54 @@ class ProductForm
                   ->required(),
               ]),
 
-            RichEditor::make('body.ar')
-              ->label('وصف المنتج (بالعربية)')
-              ->columnSpanFull(),
+            Action::make('generateProductDescription')
+              ->label('✨ توليد وصف المنتج')
+              ->action(function ($get, $set) {
 
-            RichEditor::make('body.en')
+                $nameAr = $get('name.ar');
+                $nameEn = $get('name.en');
+
+                if (!$nameAr || !$nameEn) {
+                  return;
+                }
+
+                try {
+
+                  $data = AiService::generateProductDescription(
+                    $nameAr,
+                    $nameEn
+                  );
+
+                  $set('body.ar', $data['ar']);
+                  $set('body.en', $data['en']);
+                } catch (\Prism\Prism\Exceptions\PrismRateLimitedException $e) {
+
+                  Notification::make()
+                    ->title('تم تجاوز حد استخدام Gemini')
+                    ->body('يرجى المحاولة بعد قليل.')
+                    ->danger()
+                    ->send();
+                } catch (\Exception $e) {
+
+                  Notification::make()
+                    ->title('حدث خطأ أثناء توليد الوصف')
+                    ->body('يرجى المحاولة لاحقاً.')
+                    ->danger()
+                    ->send();
+                }
+              }),
+
+
+            Textarea::make('body.ar')
+              ->label('وصف المنتج (بالعربية)')
+              ->columnSpanFull()
+              ->rows(5),
+
+
+            Textarea::make('body.en')
               ->label('Product Description (EN)')
-              ->columnSpanFull(),
+              ->columnSpanFull()
+              ->rows(5),
 
             Toggle::make('is_featured')
               ->label('منتج مميز (Featured)')

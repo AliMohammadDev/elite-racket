@@ -8,6 +8,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\Textarea;
 
 class SportTypeForm
 {
@@ -28,13 +29,15 @@ class SportTypeForm
                   ->required(),
               ]),
 
-            RichEditor::make('body.ar')
+            Textarea::make('body.ar')
               ->label('وصف المنتج (بالعربية)')
-              ->columnSpanFull(),
+              ->columnSpanFull()
+              ->rows(5),
 
-            RichEditor::make('body.en')
+            Textarea::make('body.en')
               ->label('Product Description (EN)')
-              ->columnSpanFull(),
+              ->columnSpanFull()
+              ->rows(5),
           ])
 
       ])->columns(1);
