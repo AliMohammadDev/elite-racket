@@ -23,6 +23,14 @@ class TrainingProgramSeeder extends Seeder
       return;
     }
 
+    $trainingImages = [
+      'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?q=80&w=1000&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=1000&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=1000&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1000&auto=format&fit=crop',
+    ];
+
     foreach ($couches as $couch) {
       $couchNameAr = $couch->name['ar'] ?? 'المدرب';
       $couchNameEn = $couch->name['en'] ?? 'Coach';
@@ -66,7 +74,7 @@ class TrainingProgramSeeder extends Seeder
 
         $randomSportType = $sportTypes->random();
 
-        TrainingProgram::create([
+        $program = TrainingProgram::create([
           'name' => $programData['name'],
           'sport_type_id' => $randomSportType->id,
           'price' => $programData['price'],
@@ -77,8 +85,14 @@ class TrainingProgramSeeder extends Seeder
           'start_date' => $startDate,
           'end_date' => $endDate,
         ]);
+
+        try {
+          $program->addMediaFromUrl($trainingImages[array_rand($trainingImages)])
+            ->toMediaCollection('training_programs');
+        } catch (\Exception $e) {
+          continue;
+        }
       }
     }
-
   }
 }

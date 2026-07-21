@@ -26,5 +26,4 @@ class TimeSeeder extends Seeder
       $startTime->addHour();
     }
   }
-
 }

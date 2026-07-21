@@ -10,68 +10,83 @@ class ProductSeeder extends Seeder
 {
   public function run(): void
   {
-    $categories = Category::all();
+    $tennisCategory = Category::where('name->en', 'Tennis Equipment')->first();
+    $apparelCategory = Category::where('name->en', 'Sports Apparel')->first();
+    $shoesCategory = Category::where('name->en', 'Sports Shoes')->first();
+    $padelCategory = Category::where('name->en', 'Padel Equipment')->first();
 
-    if ($categories->isEmpty()) {
+    if (!$tennisCategory || !$apparelCategory || !$shoesCategory || !$padelCategory) {
       return;
     }
 
     $productsData = [
       [
+        'category_id' => $tennisCategory->id,
         'name' => ['ar' => 'مضرب تنس Wilson Pro Staff', 'en' => 'Wilson Pro Staff Racket'],
         'body' => ['ar' => 'مضرب كلاسيكي يوفر دقة متناهية للاعبين المحترفين.', 'en' => 'Classic racket providing ultimate precision for pro players.'],
       ],
       [
-        'name' => ['ar' => 'مضرب بادل Babolat Technical Viper', 'en' => 'Babolat Technical Viper Padel'],
-        'body' => ['ar' => 'مضرب ذو قوة انفجارية مصمم للهجوم السريع.', 'en' => 'Explosive power racket designed for quick attacks.'],
+        'category_id' => $tennisCategory->id,
+        'name' => ['ar' => 'مضرب تنس Babolat Pure Drive', 'en' => 'Babolat Pure Drive Racket'],
+        'body' => ['ar' => 'يوفر قوة هائلة وتحكمًا ممتازًا في كل ضربة.', 'en' => 'Delivers explosive power and superior playability on every shot.'],
       ],
       [
-        'name' => ['ar' => 'مضرب تنس للأطفال (Head Junior)', 'en' => 'Head Junior Tennis Racket'],
-        'body' => ['ar' => 'خفيف الوزن وسهل التحكم، مثالي للمبتدئين الصغار.', 'en' => 'Lightweight and easy to handle, perfect for young beginners.'],
-      ],
-
-      [
-        'name' => ['ar' => 'كرات تنس Wilson (علبة 4 قطع)', 'en' => 'Wilson Tennis Balls (4 Pack)'],
-        'body' => ['ar' => 'الكرة الرسمية لأكبر البطولات العالمية.', 'en' => 'The official ball for major world championships.'],
-      ],
-      [
-        'name' => ['ar' => 'كرات بادل Bullpadel Premium Pro', 'en' => 'Bullpadel Premium Pro Balls'],
-        'body' => ['ar' => 'سرعة عالية ومتانة تدوم طويلاً في الملاعب.', 'en' => 'High speed and long-lasting durability on court.'],
+        'category_id' => $tennisCategory->id,
+        'name' => ['ar' => 'علبة كرات تنس Wilson Championship (4 قطع)', 'en' => 'Wilson Championship Tennis Balls (4 Pack)'],
+        'body' => ['ar' => 'الكرة الرسمية المصممة لتدريبات ومباريات التحمل العالي.', 'en' => 'Official ball designed for high-end practice and matches.'],
       ],
 
       [
-        'name' => ['ar' => 'حذاء ASICS Gel-Resolution 9', 'en' => 'ASICS Gel-Resolution 9 Shoes'],
-        'body' => ['ar' => 'يوفر ثباتاً ممتازاً وحماية للقدم أثناء الحركات الجانبية.', 'en' => 'Provides excellent stability and foot protection during lateral moves.'],
-      ],
-      [
+        'category_id' => $apparelCategory->id,
         'name' => ['ar' => 'تيشيرت Nike Court Advantage', 'en' => 'Nike Court Advantage T-Shirt'],
-        'body' => ['ar' => 'تقنية Dry-Fit المتقدمة للحفاظ على الجفاف.', 'en' => 'Advanced Dry-Fit technology to keep you dry.'],
+        'body' => ['ar' => 'تقنية Dry-Fit المتقدمة للحفاظ على الجفاف والراحة طوال المباراة.', 'en' => 'Advanced Dry-Fit technology to keep you dry and comfortable during matches.'],
       ],
       [
-        'name' => ['ar' => 'شورت بادل تقني', 'en' => 'Technical Padel Shorts'],
-        'body' => ['ar' => 'مرونة كاملة في الحركة مع جيوب مخصصة للكرات.', 'en' => 'Full freedom of movement with dedicated ball pockets.'],
+        'category_id' => $apparelCategory->id,
+        'name' => ['ar' => 'شورت بادل وتنس تقني من Adidas', 'en' => 'Adidas Club Tennis Shorts'],
+        'body' => ['ar' => 'مرونة كاملة في الحركة مع خصر مطاطي وجيوب عميقة للكرات.', 'en' => 'Full freedom of movement with an elastic waistband and deep ball pockets.'],
+      ],
+      [
+        'category_id' => $apparelCategory->id,
+        'name' => ['ar' => 'جاكيت رياضية خفيفة الوزن', 'en' => 'Lightweight Performance Sports Jacket'],
+        'body' => ['ar' => 'مصممة خصيصاً لعمليات الإحماء والأجواء الباردة.', 'en' => 'Specially designed for warm-ups and cooler weather conditions.'],
       ],
 
       [
-        'name' => ['ar' => 'حقيبة مضارب Yonex (9 قطع)', 'en' => 'Yonex Racket Bag (9 Pack)'],
-        'body' => ['ar' => 'مساحة تخزين واسعة مع حماية حرارية للمضارب.', 'en' => 'Spacious storage with thermal protection for rackets.'],
+        'category_id' => $shoesCategory->id,
+        'name' => ['ar' => 'حذاء ASICS Gel-Resolution 9', 'en' => 'ASICS Gel-Resolution 9 Shoes'],
+        'body' => ['ar' => 'يوفر ثباتاً ممتازاً وحماية للقدم أثناء الحركات الجانبية السريعة.', 'en' => 'Provides excellent stability and foot protection during fast lateral movements.'],
       ],
       [
-        'name' => ['ar' => 'قبضة مضرب (Overgrip) حزمة 3', 'en' => 'Overgrip 3-Pack'],
-        'body' => ['ar' => 'امتصاص عالي للعرق وتوفير قبضة قوية ومنعشة.', 'en' => 'High sweat absorption providing a firm and fresh grip.'],
+        'category_id' => $shoesCategory->id,
+        'name' => ['ar' => 'حذاء Adidas Barricade للملاعب', 'en' => 'Adidas Barricade Court Shoes'],
+        'body' => ['ar' => 'متانة عالية وتصميم مريح مصمم خصيصاً لملاعب التنس والبادل.', 'en' => 'High durability and comfortable design tailored for tennis and padel courts.'],
       ],
       [
-        'name' => ['ar' => 'ساعة تتبع أداء رياضية', 'en' => 'Sports Performance Tracker Watch'],
-        'body' => ['ar' => 'تتبع نبضات القلب والسعرات الحرارية أثناء المباراة.', 'en' => 'Track heart rate and calories during the match.'],
+        'category_id' => $shoesCategory->id,
+        'name' => ['ar' => 'حذاء Nike Court Vapor Lite', 'en' => 'Nike Court Vapor Lite Shoes'],
+        'body' => ['ar' => 'خفيف الوزن للغاية لسرعة استجابة فائقة على أرضية الملعب.', 'en' => 'Ultra-lightweight design for maximum responsiveness on the court.'],
+      ],
+
+      [
+        'category_id' => $padelCategory->id,
+        'name' => ['ar' => 'مضرب بادل Babolat Technical Viper', 'en' => 'Babolat Technical Viper Padel'],
+        'body' => ['ar' => 'مضرب ذو قوة انفجارية مصمم للهجوم السريع والضربات القاضية.', 'en' => 'Explosive power padel racket designed for rapid attacks and smashes.'],
+      ],
+      [
+        'category_id' => $padelCategory->id,
+        'name' => ['ar' => 'مضرب بادل Bullpadel Hack 03', 'en' => 'Bullpadel Hack 03 Padel Racket'],
+        'body' => ['ar' => 'مضرب احترافي يجمع بين القوة المطلقة والتحكم الاستثنائي.', 'en' => 'Pro racket combining absolute power and exceptional control.'],
+      ],
+      [
+        'category_id' => $padelCategory->id,
+        'name' => ['ar' => 'كرات بادل Bullpadel Premium Pro (علبة 3)', 'en' => 'Bullpadel Premium Pro Padel Balls (3 Pack)'],
+        'body' => ['ar' => 'سرعة عالية وعمر افتراضي طويل مصممة خصيصاً لملاعب البادل.', 'en' => 'High speed and long durability specifically engineered for padel courts.'],
       ],
     ];
 
-    foreach ($productsData as $item) {
-      Product::create([
-        'name' => $item['name'],
-        'body' => $item['body'],
-        'category_id' => $categories->random()->id,
-      ]);
+    foreach ($productsData as $productData) {
+      Product::create($productData);
     }
   }
 }
