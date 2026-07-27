@@ -55,7 +55,7 @@ class CategorySeeder extends Seeder
           'ar' => 'مضارب البادل وكراته وأهم التجهيزات الخاصة باللعبة',
           'en' => 'Padel rackets, balls, and essential equipment for the game'
         ],
-        'image_url' => 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=800&auto=format&fit=crop',
+        'image_url' => 'https://www.villaggiosanfrancesco.com/wp-content/uploads/2024/04/padel-banner.jpg',
       ],
     ];
 

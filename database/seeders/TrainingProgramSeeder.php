@@ -24,11 +24,11 @@ class TrainingProgramSeeder extends Seeder
     }
 
     $trainingImages = [
-      'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?q=80&w=1000&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=1000&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=1000&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1000&auto=format&fit=crop',
+      'https://blog.davidlloyd.co.uk/wp-content/uploads/2024/02/Social_Portrait-Head-racquets-576x1024.jpg',
+      'https://www.bluecoatsports.co.uk/wp-content/uploads/2023/05/Untitled-design-3.jpg  ',
+      'https://blog.urbansportsclub.com/wp-content/uploads/2023/08/UrbanSportsClub_UN_Padel_09-1024x683.jpg',
+      'https://www.basicfeather.com/cdn/shop/files/BF_White.jpg?v=1772960701&width=640',
+      'https://quicksand.co.uk/wp-content/uploads/2025/10/QS-What-is-Padel.jpg',
     ];
 
     foreach ($couches as $couch) {

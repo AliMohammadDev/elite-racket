@@ -20,24 +20,54 @@ class ProductVariantFactory extends Factory
   protected $model = ProductVariant::class;
 
   private $imageUrls = [
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494439/pexels-cottonbro-5739125_t12zud.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494438/pexels-cottonbro-5740525_e0wcj2.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494436/pexels-ellie-burgin-1661546-17429850_b8emoc.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494435/661ca846489ab67d8c5776bddd21c9b1_oivbtj.webp',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494435/paddle-tennis-ibiza-villa_pk4zbn.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494434/pexels-hson-27151849_bh2tok.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494433/pexels-ridwan-nugraha-692540814-35214630_up1hzz.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494433/pexels-ridwan-nugraha-692540814-35214649_qcgpem.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494431/pexels-tochtliyeung1996-34116479_rzwowb.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494430/pexels-thomas-plets-1139798-8894610_bm4n81.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494429/pexels-sonny-29248906_blviup.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494434/pexels-mutecevvil-22931869_yp16o1.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494434/pexels-franki-frank-27440719_foepct.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494433/pexels-ozanyavuzphoto-31054362_harnrk.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494431/pexels-tuan-vy-903011268-29696876_uhrioe.jpg',
-    'https://res.cloudinary.com/dzvrf9xe3/image/upload/v1776494430/pexels-tochtliyeung1996-34116480_a145rq.jpg',
-  ];
+    // Professional padel racket
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuYy_pDfY7LyHteEV2uI5YrKts2_dd5IQGvsMZtsk2bw&s',
 
+    // Tennis racket and balls
+    'https://as1.ftcdn.net/v2/jpg/00/91/43/24/1000_F_91432481_8f41LSneIZLb9L4JCrYURelRculHBSO9.jpg',
+
+    // Tennis balls on court
+    'https://inkarto.com/cdn/shop/products/parshwa-traders-tennis-ball-36960781140181.jpg?v=1760258584&width=360',
+
+    // Tennis accessories and rackets
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3Km-GjTeSVVGo8B52B33khZmz8T2shQKypA4Un4hOgdaveXQ2sdAloePg&s=10',
+
+    // Sports apparel clothing
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnLwMOUDU1FXOBrwDblONbv6GHIfl35tnC6KN0jMxLNuS6REkeTBZr0fF8&s=10',
+
+    // Tennis player in white outfit
+    'https://img.redbull.com/images/q_auto,f_auto/redbullcom/2026/6/23/d24rzaxyzrfkzsyo1eus/jakub-mesik-white-outfit-wimbledon',
+
+    // Sports t-shirts
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4tVlBczF5F70Ia8528W7kAtfXNLk8QW_ihEjRLMYwhA&s',
+
+    // Professional sports shoes
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjIh-mUXDAY2ULa5p5gFhAzmDT45b_2yVYydiAIGG_PcgWMozgNFtacqM&s=10',
+
+    // Tennis racket bag
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4dubOOdI1tnqKo1MdVhnbt2Twjnzy-90_xxLaA2IL1nK5J7DIGI20g0k&s=10',
+
+    // Padel training session
+    'https://americano-padel.app/images/blog/padel-training-drills-two-players-court.webp',
+
+    // Various sports equipment
+    'https://t4.ftcdn.net/jpg/00/04/43/79/360_F_4437974_DbE4NRiaoRtUeivMyfPoXZFNdCnYmjPq.jpg',
+
+    // Close-up padel racket
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR73veKqYG_cX9DR3BH3eHXa3EpXQM9Rrdb1HU84TXTrOF6tVjWEM6PrT3a&s=10',
+
+    // Modern padel apparel
+    'https://images.unsplash.com/photo-1560012057-4372e1e1c3e6?q=80&w=1000&auto=format&fit=crop',
+
+    // Sun protection caps and accessories
+    'https://sunprotectionclothing.co.uk/cdn/shop/files/pocket-wide-brim-sun-baseball-cap-7452306.png?v=1752255059&width=1200',
+
+    // Padel and tennis fashion
+    'https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2Ff3b91437-d333-47a0-acfd-44289d418af8.jpg?source=next-article&fit=scale-down&quality=highest&width=700&dpr=1',
+
+    // Additional tennis gear
+    'https://greatcallathletics.com/cdn/shop/collections/a8e5a47e-801d-401a-bc70-667b2eb13936.png?v=1773782346&width=1024',
+  ];
   public function definition(): array
   {
     return [
