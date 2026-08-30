@@ -44,7 +44,7 @@ class socialAuthController extends Controller
 
     $token = $user->createToken('auth_token')->plainTextToken;
 
-    return redirect("https://elite-racket.com//google-callback?token=$token");
+    return redirect("https://elite-racket.com/google-callback?token=$token");
     // return redirect("https://almanzel-alhadith.com/google-callback?token=$token");
   }
 }
