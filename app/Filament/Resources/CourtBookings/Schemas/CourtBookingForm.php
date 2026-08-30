@@ -33,7 +33,6 @@ class CourtBookingForm
               ->getOptionLabelFromRecordUsing(fn($record) => $record->translated_name)
               ->live()
               ->afterStateUpdated(function ($state, $set, $get) {
-
                 $court = Court::find($state);
                 $times = $get('times') ?? [];
                 if ($court && count($times) > 0) {
@@ -60,20 +59,27 @@ class CourtBookingForm
               ->relationship('times', 'from')
               ->multiple()
               ->allowHtml()
-              ->getOptionLabelFromRecordUsing(function ($record, $get) {
+              ->getOptionLabelFromRecordUsing(function ($record, $get, $component) {
                 $label =
                   Carbon::parse($record->from)->format('h:i A') . ' - ' .
                   Carbon::parse($record->to)->format('h:i A');
+
                 $courtId = $get('court_id');
                 $date = $get('booking_date');
+                // استخراج معرف الحجز الحالي بأمان تام في وضع التعديل لتجنب التعارض مع نفس الحجز
+                $currentBookingId = $component->getLivewire()->record?->id ?? null;
+
                 if (!$courtId || !$date) {
                   return $label;
                 }
+
                 $isBooked = $record->courtBookings()
                   ->where('court_id', $courtId)
                   ->whereDate('booking_date', $date)
                   ->whereIn('status', ['approved', 'pending'])
+                  ->when($currentBookingId, fn($q) => $q->where('court_bookings.id', '!=', $currentBookingId))
                   ->exists();
+
                 if ($isBooked) {
                   return "<span style='color:red;font-weight:bold;'>$label (محجوز)</span>";
                 }
@@ -81,17 +87,21 @@ class CourtBookingForm
               })
               ->live()
               ->preload()
-              ->disableOptionWhen(function ($value, $get) {
+              ->disableOptionWhen(function ($value, $get, $component) {
                 $courtId = $get('court_id');
                 $date = $get('booking_date');
+                $currentBookingId = $component->getLivewire()->record?->id ?? null;
+
                 if (!$courtId || !$date) {
                   return false;
                 }
+
                 return Time::where('id', $value)
-                  ->whereHas('courtBookings', function ($query) use ($courtId, $date) {
+                  ->whereHas('courtBookings', function ($query) use ($courtId, $date, $currentBookingId) {
                     $query->where('court_id', $courtId)
                       ->whereDate('booking_date', $date)
-                      ->whereIn('status', ['approved', 'pending']);
+                      ->whereIn('status', ['approved', 'pending'])
+                      ->when($currentBookingId, fn($q) => $q->where('court_bookings.id', '!=', $currentBookingId));
                   })->exists();
               })
               ->afterStateUpdated(function ($state, $set, $get) {
@@ -103,7 +113,6 @@ class CourtBookingForm
                 }
               })
               ->required(),
-
 
             Select::make('couch_id')
               ->label('الكوتش')
