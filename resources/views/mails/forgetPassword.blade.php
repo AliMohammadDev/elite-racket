@@ -40,7 +40,7 @@
                             </p>
 
                             <div style="text-align: center; margin-bottom: 35px;">
-                                <a href="http://localhost:5173/reset-password?token={{ $token }}&email={{ $email }}"
+                                <a href="https://elite-racket.com/reset-password?token={{ $token }}&email={{ $email }}"
                                     style="background-color: #025043; color: #ffffff; padding: 16px 35px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 12px rgba(2, 80, 67, 0.2);">
                                     Reset Password
                                 </a>
@@ -51,7 +51,7 @@
                                 <p style="margin: 0 0 10px 0; font-size: 13px; color: #999;">If the button above doesn't
                                     work, copy and paste this URL into your browser:</p>
                                 <p style="margin: 0; font-size: 13px; word-break: break-all; color: #025043;">
-                                    http://localhost:5173/reset-password?token={{ $token }}&email={{ $email }}
+                                    https://elite-racket.com/reset-password?token={{ $token }}&email={{ $email }}
                                 </p>
                             </div>
 
